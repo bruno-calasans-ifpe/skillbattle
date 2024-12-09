@@ -21,6 +21,7 @@ import {
   Users,
   Info,
   X,
+  Component,
 } from "lucide-react";
 
 import { SiInstagram, SiDiscord, SiX } from "@icons-pack/react-simple-icons";
@@ -35,14 +36,18 @@ export default function AppSidebar({ onCloseMenu }: AppSidebarProps) {
     <Sidebar>
       <SidebarHeader />
       <div className="flex items-center justify-between p-2">
-        <p className="text-xl text-purple-600">SkillBattle</p>
+        <div className="flex items-center gap-1">
+          <Component className="text-purple-600 group-hover/btn:text-red-600" />
+          <p className="text-xl text-purple-600">SkillBattle</p>
+        </div>
         <Button
           onClick={onCloseMenu}
           variant="ghost"
-          className="self-end group/btn"
+          className="group/btn hover:bg-transparent cursor-pointer rotate-90 hover:rotate-12 transition-all ease-in-out duration-300"
           size="icon"
+          asChild
         >
-          <X className="group-hover/btn:text-red-600" />
+          <X size={20} className="group-hover/btn:text-red-600 " />
         </Button>
       </div>
 

@@ -1,5 +1,7 @@
-type LoginPageProps = {}
+"uses client";
 
-export default function LoginPage({}:LoginPageProps){
-    return <div>LoginPage</div>
+type LoginPageProps = {};
+
+export default function LoginPage({}: LoginPageProps) {
+  return <div>LoginPage</div>;
 }
