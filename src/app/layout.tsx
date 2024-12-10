@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import Header from "@/components/custom/Header";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Skillbattle",
@@ -18,6 +19,7 @@ export default function RootLayout({
       <body className="flex flex-col h-full">
         <Header />
         <main className="flex flex-1">{children}</main>
+        <Toaster />
       </body>
     </html>
   );

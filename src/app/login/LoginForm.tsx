@@ -12,7 +12,6 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -32,50 +31,22 @@ type RegisterFormProps = {
   onGoBack: () => void;
 };
 
-const formSchema = z
-  .object({
-    username: z
-      .string()
-      .min(3, "Usuário deve ter 3 caracteres no mínimo")
-      .max(16, "Usuário deve ter 20 caracteres no máximo")
-      .refine(
-        (value) => {
-          return /^[a-zA-Z_]+$/.test(value);
-        },
-        {
-          message: "Usário deve conter apenas letras ou _",
-        }
-      ),
-    email: z.string().email("Email inválido"),
-    password: z
-      .string()
-      .min(6, "Senha deve ter 6 caracteres no mínimo")
-      .max(8, "Senha deve ter 8 caracteres no máximo"),
-    passwordConfirmation: z
-      .string()
-      .min(6, "Confirmação de Senha deve ter 6 caracteres no mínimo")
-      .max(8, "Confirmação de Senha deve ter 8 caracteres no máximo"),
-  })
-  .refine(
-    (values) => {
-      return values.password === values.passwordConfirmation;
-    },
-    {
-      message: "Senhas são diferentes",
-      path: ["passwordConfirmation"],
-    }
-  );
+const formSchema = z.object({
+  email: z.string().email("Email inválido"),
+  password: z
+    .string()
+    .min(6, "Senha deve ter 6 caracteres no mínimo")
+    .max(8, "Senha deve ter 8 caracteres no máximo"),
+});
 
-export default function RegisterForm({ onGoBack }: RegisterFormProps) {
+export default function LoginForm({ onGoBack }: RegisterFormProps) {
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
       email: "",
       password: "",
-      passwordConfirmation: "",
     },
   });
 
@@ -85,8 +56,8 @@ export default function RegisterForm({ onGoBack }: RegisterFormProps) {
     setLoading(true);
     console.log(values);
     toast({
-      title: "Registro",
-      description: "Conta criada com sucesso",
+      title: "Login",
+      description: "Logado com sucesso!",
       className: "bg-green-200 font-bold text-black",
     });
     setLoading(false);
@@ -104,9 +75,9 @@ export default function RegisterForm({ onGoBack }: RegisterFormProps) {
             <ChevronLeft className="font-bold group-hover:-translate-x-1 transition-all" />
             <p>Voltar</p>
           </Button>
-          <CardTitle>Criar conta</CardTitle>
+          <CardTitle>Entrar</CardTitle>
           <CardDescription>
-            Você está criando uma conta com seu email.
+            Você está entrando na sua conta com seu email.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -115,21 +86,6 @@ export default function RegisterForm({ onGoBack }: RegisterFormProps) {
               onSubmit={form.handleSubmit(submitHandler)}
               className="space-y-8"
             >
-              <FormField
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-bold text-purple-600">
-                      Usuário
-                    </FormLabel>
-                    <FormControl>
-                      <Input placeholder="usuário" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
               <FormField
                 control={form.control}
                 name="email"
@@ -145,6 +101,7 @@ export default function RegisterForm({ onGoBack }: RegisterFormProps) {
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="password"
@@ -154,27 +111,17 @@ export default function RegisterForm({ onGoBack }: RegisterFormProps) {
                       Senha
                     </FormLabel>
                     <FormControl>
-                      <Input type="password" {...field} />
+                      <Input
+                        placeholder="Sua senha"
+                        type="password"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="passwordConfirmation"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-bold text-purple-600">
-                      Confirmação de Senha
-                    </FormLabel>
-                    <FormControl>
-                      <Input type="password" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+
               <Button
                 disabled={loading}
                 type="submit"
@@ -183,10 +130,10 @@ export default function RegisterForm({ onGoBack }: RegisterFormProps) {
                 {loading ? (
                   <div className="flex gap-1">
                     <Loader2 className="animate-spin" />
-                    Criando...
+                    Entrando...
                   </div>
                 ) : (
-                  "Criar conta"
+                  "Entrar"
                 )}
               </Button>
             </form>

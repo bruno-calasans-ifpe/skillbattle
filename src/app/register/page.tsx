@@ -76,7 +76,7 @@ export default function RegisterPage({}: RegisterPageProps) {
         <Image
           width={300}
           height={30}
-          src="/imgs/register-welcome.png"
+          src="/imgs/register.svg"
           alt="welcome-register"
         />
       </Card>
