@@ -6,9 +6,8 @@ import {
   FIREBASE_PROJECT_ID,
   FIREBASE_STORAGE_BUCKET,
 } from "@/config/env";
-import firebase, { FirebaseOptions } from "firebase/app";
 
-import { initializeApp } from "firebase/app";
+import { FirebaseOptions, initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const FIREBASE_CONFIG: FirebaseOptions = {
@@ -21,9 +20,7 @@ const FIREBASE_CONFIG: FirebaseOptions = {
 };
 
 // if there's no initialized app
-if (!firebase.getApps().length) {
-  const app = initializeApp(FIREBASE_CONFIG);
-}
+const app = initializeApp(FIREBASE_CONFIG);
 
 // Initialize Firebase
-export default firebase;
+export default app;

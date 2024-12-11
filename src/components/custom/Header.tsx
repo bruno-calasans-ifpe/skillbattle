@@ -3,19 +3,23 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-
 import { User, Menu, Forward, LogIn } from "lucide-react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/custom/AppSideBard";
+import auth from "@/services/firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 type HeaderProps = {};
 
 export default function Header({}: HeaderProps) {
   const [open, setOpenSideBar] = useState(false);
+  const [user, loading] = useAuthState(auth);
 
   const toggleSideBar = () => {
     setOpenSideBar((current) => !current);
   };
+
+  if (loading) return null;
 
   return (
     <>
@@ -47,28 +51,32 @@ export default function Header({}: HeaderProps) {
             <Forward className="text-white " />
             <p className="text-white font-bold">Entrar com código</p>
           </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            asChild
-            className="bg-purple-200 hover:bg-purple-300 group"
-          >
-            <Link href="login">
-              <LogIn className="text-purple-600 " />
-              <p className="text-purple-600 font-bold">Login</p>
-            </Link>
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            asChild
-            className="bg-purple-600 hover:bg-purple-500 group font-bold"
-          >
-            <Link href="register">
-              <User className="text-white " />
-              <p className="text-white font-bold ">Entrar</p>
-            </Link>
-          </Button>
+          {!user && (
+            <div className="flex gap-1">
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className="bg-purple-200 hover:bg-purple-300 group"
+              >
+                <Link href="login">
+                  <LogIn className="text-purple-600 " />
+                  <p className="text-purple-600 font-bold">Login</p>
+                </Link>
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className="bg-purple-600 hover:bg-purple-500 group font-bold"
+              >
+                <Link href="register">
+                  <User className="text-white " />
+                  <p className="text-white font-bold ">Entrar</p>
+                </Link>
+              </Button>
+            </div>
+          )}
         </div>
       </header>
     </>

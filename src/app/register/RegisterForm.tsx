@@ -26,6 +26,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { registerWithEmail } from "@/services/firebase/auth";
+import { useRouter } from "next/navigation";
 
 type RegisterFormProps = {
   onGoBack: () => void;
@@ -67,6 +69,7 @@ const formSchema = z
 
 export default function RegisterForm({ onGoBack }: RegisterFormProps) {
   const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -80,14 +83,33 @@ export default function RegisterForm({ onGoBack }: RegisterFormProps) {
 
   const [loading, setLoading] = useState(false);
 
-  const submitHandler = (values: z.infer<typeof formSchema>) => {
+  const submitHandler = async ({
+    username,
+    email,
+    password,
+  }: z.infer<typeof formSchema>) => {
     setLoading(true);
-    console.log(values);
-    toast({
-      title: "Registro",
-      description: "Conta criada com sucesso",
-      className: "bg-green-200 font-bold text-black",
-    });
+    try {
+      // register with email and password
+      await registerWithEmail(email, password);
+
+      // show toast
+      toast({
+        title: "Registro",
+        description: "Conta criada com sucesso",
+        className: "bg-green-200 font-bold text-black",
+      });
+
+      // redirect to home page
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Registro falhou",
+        description: "Houve algum problema ao criar sua conta :(",
+        className: "bg-red-200 font-bold text-black",
+      });
+    }
     setLoading(false);
   };
 
