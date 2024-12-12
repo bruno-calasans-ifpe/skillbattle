@@ -33,7 +33,8 @@ export default function LoginPage({}: RegisterPageProps) {
         <div className="flex flex-col">
           <CardHeader>
             <CardTitle>
-              Bem-vindo de volta ao <span className="text-purple-600">SkillBattle</span>!
+              Bem-vindo de volta ao{" "}
+              <span className="text-purple-600">SkillBattle</span>!
             </CardTitle>
             <CardDescription>
               Entre na sua conta para desafiar outros jogadores!
@@ -43,7 +44,7 @@ export default function LoginPage({}: RegisterPageProps) {
             <Button className="flex justify-between w-full bg-white text-black font-bold hover:bg-[#D62D20] hover:text-white group transition-all">
               <div className="flex gap-2 items-center">
                 <SiGoogle className="text-[#D62D20] group-hover:text-white transition-all" />
-                Entrar  com Google
+                Entrar com Google
               </div>
               <ArrowRight className="group-hover:translate-x-2 transition-all" />
             </Button>
