@@ -7,6 +7,8 @@ declare global {
       NEXT_PUBLIC_STORAGE_BUCKET: string;
       NEXT_PUBLIC_MESSAGING_SENDER_ID: string;
       NEXT_PUBLIC_APP_ID: string;
+      NEXT_PUBLIC_GOOGLE_CLIENT_ID: string;
+      NEXT_PUBLIC_GOOGLE_SECRET_ID: string;
     }
   }
 }

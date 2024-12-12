@@ -16,6 +16,7 @@ import { SiGoogle } from "@icons-pack/react-simple-icons";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import RegisterForm from "./RegisterForm";
+import { signIn } from "next-auth/react";
 
 type RegisterPageProps = {};
 
@@ -24,6 +25,10 @@ export default function RegisterPage({}: RegisterPageProps) {
 
   const emailLoginFormToggle = () => {
     setShowEmailForm((current) => !current);
+  };
+
+  const googleRegisterHandler = async () => {
+    await signIn("google", { callbackUrl: "/" });
   };
 
   return (
@@ -40,7 +45,10 @@ export default function RegisterPage({}: RegisterPageProps) {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button className="flex justify-between w-full bg-white text-black font-bold hover:bg-[#D62D20] hover:text-white group transition-all">
+            <Button
+              onClick={googleRegisterHandler}
+              className="flex justify-between w-full bg-white text-black font-bold hover:bg-[#D62D20] hover:text-white group transition-all"
+            >
               <div className="flex gap-2 items-center">
                 <SiGoogle className="text-[#D62D20] group-hover:text-white transition-all" />
                 Continuar com Google

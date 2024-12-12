@@ -54,7 +54,6 @@ export default function LoginForm({ onGoBack }: RegisterFormProps) {
 
   const submitHandler = (values: z.infer<typeof formSchema>) => {
     setLoading(true);
-    console.log(values);
     toast({
       title: "Login",
       description: "Logado com sucesso!",
