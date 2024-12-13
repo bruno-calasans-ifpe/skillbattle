@@ -22,13 +22,12 @@ const handler = NextAuth({
         },
       },
       from: process.env.EMAIL_FROM,
-      maxAge: 24 * 60 * 60, // How long email links are valid for (default 24h)
+      maxAge: 5 * 60, // 5 minutes
     }),
   ],
   adapter: FirestoreAdapter(firebaseApp),
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      console.log(user);
       return true;
     },
     async session({ session, token, user }) {
@@ -42,7 +41,7 @@ const handler = NextAuth({
   },
   pages: {
     signIn: "/",
-    // verifyRequest: '/'
+    verifyRequest: "/verify-email",
   },
 });
 

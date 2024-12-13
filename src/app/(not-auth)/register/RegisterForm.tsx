@@ -36,18 +36,6 @@ type RegisterFormProps = {
 
 const formSchema = z
   .object({
-    username: z
-      .string()
-      .min(3, "Usuário deve ter 3 caracteres no mínimo")
-      .max(16, "Usuário deve ter 20 caracteres no máximo")
-      .refine(
-        (value) => {
-          return /^[a-zA-Z_]+$/.test(value);
-        },
-        {
-          message: "Usário deve conter apenas letras ou _",
-        }
-      ),
     email: z.string().email("Email inválido"),
     password: z
       .string()
@@ -75,7 +63,6 @@ export default function RegisterForm({ onGoBack }: RegisterFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
       email: "",
       password: "",
       passwordConfirmation: "",
@@ -85,7 +72,6 @@ export default function RegisterForm({ onGoBack }: RegisterFormProps) {
   const [loading, setLoading] = useState(false);
 
   const submitHandler = async ({
-    username,
     email,
     password,
   }: z.infer<typeof formSchema>) => {
@@ -137,7 +123,7 @@ export default function RegisterForm({ onGoBack }: RegisterFormProps) {
               onSubmit={form.handleSubmit(submitHandler)}
               className="space-y-8"
             >
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="username"
                 render={({ field }) => (
@@ -151,7 +137,7 @@ export default function RegisterForm({ onGoBack }: RegisterFormProps) {
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
               <FormField
                 control={form.control}
                 name="email"
