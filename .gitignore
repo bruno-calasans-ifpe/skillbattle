@@ -40,4 +40,4 @@ yarn-error.log*
 next-env.d.ts
 
 #google
-/src/data/firebase_credentials.json
+*credentials.json
