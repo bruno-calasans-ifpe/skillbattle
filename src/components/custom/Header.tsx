@@ -3,11 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { User, Menu, Forward, LogIn } from "lucide-react";
+import { User, Menu, LogIn } from "lucide-react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/custom/AppSideBard";
 import { Session } from "next-auth";
 import UserAvatar from "./UserAvatar";
+import CodeBtn from "./CodeBtn";
+import CreateChallengeBtn from "./CreateChallengeBtn";
 
 type HeaderProps = {
   session: Session | null;
@@ -42,14 +44,7 @@ export default function Header({ session }: HeaderProps) {
         </div>
         {!session && (
           <div className="flex gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="bg-emerald-600 hover:bg-emerald-700 group"
-            >
-              <Forward className="text-white " />
-              <p className="text-white font-bold">Entrar com código</p>
-            </Button>
+            <CodeBtn />
 
             <div className="flex gap-1">
               <Button
@@ -77,7 +72,12 @@ export default function Header({ session }: HeaderProps) {
             </div>
           </div>
         )}
-        {session && session.user && <UserAvatar user={session.user} />}
+        {session && session.user && (
+          <div className="flex items-center">
+            <CreateChallengeBtn />
+            <UserAvatar user={session.user} />
+          </div>
+        )}
       </header>
     </>
   );

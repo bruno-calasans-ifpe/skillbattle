@@ -6,7 +6,7 @@ import {
   CarouselContent,
   CarouselItem,
   CarouselNext,
-  CarouselPrevious,
+  CarouselPrevious, 
 } from "@/components/ui/carousel";
 
 export default function Home() {
