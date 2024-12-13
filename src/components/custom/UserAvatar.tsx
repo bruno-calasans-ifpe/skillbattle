@@ -49,7 +49,7 @@ export default function UserAvatar({ user }: UserAvatarProps) {
 
   const showUserName = () => {
     if (!user) return "user";
-    if (user.name) return user.name;
+    if (user.name) return user.name.split(" ")[0];
     if (user.email) return user.email.split("@")[0];
     return "";
   };

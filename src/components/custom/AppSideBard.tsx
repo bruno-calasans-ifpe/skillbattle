@@ -54,7 +54,7 @@ export default function AppSidebar({ onCloseMenu }: AppSidebarProps) {
       <SidebarContent>
         {/* Principal */}
         <SidebarGroup />
-        <SidebarGroupLabel>Application</SidebarGroupLabel>
+        <SidebarGroupLabel>Principal</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
             <SidebarMenuItem>
