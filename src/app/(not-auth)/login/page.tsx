@@ -16,6 +16,7 @@ import { SiGoogle } from "@icons-pack/react-simple-icons";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import LoginForm from "./LoginForm";
+import { signIn } from "next-auth/react";
 
 type RegisterPageProps = {};
 
@@ -24,6 +25,10 @@ export default function LoginPage({}: RegisterPageProps) {
 
   const emailLoginFormToggle = () => {
     setShowEmailForm((current) => !current);
+  };
+
+  const googleLoginHandler = async () => {
+    await signIn("google");
   };
 
   return (
@@ -41,10 +46,13 @@ export default function LoginPage({}: RegisterPageProps) {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button className="flex justify-between w-full bg-white text-black font-bold hover:bg-[#D62D20] hover:text-white group transition-all">
+            <Button
+              onClick={googleLoginHandler}
+              className="flex justify-between w-full bg-white text-black font-bold hover:bg-[#D62D20] hover:text-white group transition-all"
+            >
               <div className="flex gap-2 items-center">
                 <SiGoogle className="text-[#D62D20] group-hover:text-white transition-all" />
-                Entrar com Google
+                Continuar com Google
               </div>
               <ArrowRight className="group-hover:translate-x-2 transition-all" />
             </Button>
@@ -56,7 +64,7 @@ export default function LoginPage({}: RegisterPageProps) {
             >
               <div className="flex items-center gap-2 ">
                 <Mail className="text-blue-600 group-hover:text-white transition-all" />
-                Entrar com email
+                Continuar com email
               </div>
               <ArrowRight className="group-hover:translate-x-2 transition-all" />
             </Button>

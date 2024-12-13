@@ -28,6 +28,7 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { registerWithEmail } from "@/services/firebase/auth";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 type RegisterFormProps = {
   onGoBack: () => void;
@@ -91,7 +92,8 @@ export default function RegisterForm({ onGoBack }: RegisterFormProps) {
     setLoading(true);
     try {
       // register with email and password
-      await registerWithEmail(email, password);
+      // await registerWithEmail(email, password);
+      await signIn("email", { email });
 
       // show toast
       toast({
@@ -103,7 +105,6 @@ export default function RegisterForm({ onGoBack }: RegisterFormProps) {
       // redirect to home page
       router.push("/");
     } catch (error) {
-      console.log(error);
       toast({
         title: "Registro falhou",
         description: "Houve algum problema ao criar sua conta :(",

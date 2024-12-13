@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/firebase-adapter": "^2.7.4",
     "@hookform/resolvers": "^3.9.1",
     "@icons-pack/react-simple-icons": "^10.2.0",
     "@radix-ui/react-avatar": "^1.1.1",
@@ -22,9 +23,11 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "firebase": "^11.0.2",
+    "firebase-admin": "^12.7.0",
     "lucide-react": "^0.468.0",
     "next": "15.0.4",
     "next-auth": "^4.24.11",
+    "nodemailer": "^6.9.16",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-firebase-hooks": "^5.1.1",
@@ -38,6 +41,7 @@
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/nodemailer": "^6.4.17",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^8",

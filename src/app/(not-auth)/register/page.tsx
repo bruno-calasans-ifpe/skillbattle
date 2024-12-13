@@ -28,7 +28,7 @@ export default function RegisterPage({}: RegisterPageProps) {
   };
 
   const googleRegisterHandler = async () => {
-    await signIn("google", { callbackUrl: "/" });
+    await signIn("google");
   };
 
   return (
@@ -51,7 +51,7 @@ export default function RegisterPage({}: RegisterPageProps) {
             >
               <div className="flex gap-2 items-center">
                 <SiGoogle className="text-[#D62D20] group-hover:text-white transition-all" />
-                Continuar com Google
+                Entrar com Google
               </div>
               <ArrowRight className="group-hover:translate-x-2 transition-all" />
             </Button>
@@ -63,7 +63,7 @@ export default function RegisterPage({}: RegisterPageProps) {
             >
               <div className="flex items-center gap-2 ">
                 <Mail className="text-blue-600 group-hover:text-white transition-all" />
-                Continuar com email
+                Entrar com email
               </div>
               <ArrowRight className="group-hover:translate-x-2 transition-all" />
             </Button>

@@ -1,6 +1,10 @@
 import { GOOGLE_CLIENT_ID, GOOGLE_SECRET_ID } from "@/config/env";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+// import Nodemailer from "next-auth/providers/email";
+import EmailProvider from "next-auth/providers/email";
+import { FirestoreAdapter } from "@auth/firebase-adapter";
+import firebaseApp from "@/services/firebase/app";
 
 const handler = NextAuth({
   providers: [
@@ -8,16 +12,38 @@ const handler = NextAuth({
       clientId: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_SECRET_ID,
     }),
+    EmailProvider({
+      server: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: process.env.EMAIL_SERVER_PORT,
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD,
+        },
+      },
+      from: process.env.EMAIL_FROM,
+      maxAge: 24 * 60 * 60, // How long email links are valid for (default 24h)
+    }),
   ],
+  adapter: FirestoreAdapter(firebaseApp),
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log(user);
+      return true;
+    },
+    async session({ session, token, user }) {
+      console.log(session);
+      return session;
+    },
+  },
+  session: {
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
   pages: {
-    // signIn: "/register",
-    // signOut: "/auth/signout",
-    // error: "/auth/error", // Error code passed in query string as ?error=
-    // verifyRequest: "/auth/verify-request", // (used for check email message)
-    // newUser: "/auth/new-user", // New users will be directed here on first sign in (leave the property out if not of interest)
+    signIn: "/",
+    // verifyRequest: '/'
   },
 });
 
 export { handler as GET, handler as POST };
-
-
