@@ -10,6 +10,7 @@ import { Session } from "next-auth";
 import UserAvatar from "./UserAvatar";
 import CodeBtn from "./CodeBtn";
 import CreateChallengeBtn from "./CreateChallengeBtn";
+import { Input } from "../ui/input";
 
 type HeaderProps = {
   session: Session | null;
@@ -24,7 +25,7 @@ export default function Header({ session }: HeaderProps) {
 
   return (
     <>
-      <header className=" text-white flex items-center justify-between p-4 bg-primary h-24 border-b-2 border-purple-600">
+      <header className=" text-white flex items-center justify-between p-4 bg-primary h-28 border-b-2 border-purple-600 gap-10">
         <SidebarProvider className={open ? "absolute" : "hidden"} open={open}>
           <AppSidebar onCloseMenu={toggleSideBar} />
         </SidebarProvider>
@@ -41,6 +42,13 @@ export default function Header({ session }: HeaderProps) {
           <Link href="/">
             <div>Logo</div>
           </Link>
+        </div>
+        <div className="flex-1">
+          <Input
+            type="search"
+            className="bg-white text-black"
+            placeholder="Pesquise por desafios"
+          />
         </div>
         {!session && (
           <div className="flex gap-2">
