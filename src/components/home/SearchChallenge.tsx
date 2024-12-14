@@ -51,7 +51,7 @@ export default function SearchChallenge({}: SearchChallengeProps) {
       >
         <CarouselContent>
           {categories.map((category) => (
-            <CarouselItem key={category} className="lg:basis-1/12 basis-1/8">
+            <CarouselItem key={category} className="basis-1/1">
               <Badge
                 key={category}
                 onClick={() => changeCategory(category)}
