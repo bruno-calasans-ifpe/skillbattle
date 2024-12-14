@@ -10,7 +10,7 @@ export default function CreateChallengeBtn({}: CreateChallengeBtnProps) {
       <Button
         variant="ghost"
         size="sm"
-        className="bg-purple-600 hover:bg-purple-700 group"
+        className="bg-emerald-500 hover:bg-emerald-600 group"
       >
         <Plus className="text-white " />
         <p className="text-white font-bold">Criar</p>

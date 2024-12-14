@@ -43,13 +43,13 @@ export default function Header({ session }: HeaderProps) {
             <div>Logo</div>
           </Link>
         </div>
-        <div className="flex-1">
+        {/* <div className="flex-1">
           <Input
             type="search"
             className="bg-white text-black"
             placeholder="Pesquise por desafios"
           />
-        </div>
+        </div> */}
         {!session && (
           <div className="flex gap-2">
             <CodeBtn />
