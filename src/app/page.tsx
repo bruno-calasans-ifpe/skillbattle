@@ -9,7 +9,11 @@ export default function Home() {
   return (
     <section className="flex flex-col gap-10 flex-1 items-center lg:max-w-[900px] md:max-w-[600px] m-auto p-5 mt-5">
       <SearchChallenge />
-      <FeatureChallenges challenges={CHALLENGE_DATA} />
+      <FeatureChallenges
+        showMoreUrl="/"
+        title="Desafios em destaque"
+        challenges={CHALLENGE_DATA}
+      />
       <RecentChallenges challenges={CHALLENGE_DATA} />
     </section>
   );

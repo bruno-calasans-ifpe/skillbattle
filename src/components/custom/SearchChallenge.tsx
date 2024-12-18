@@ -14,19 +14,7 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { Search } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-
-const categories = [
-  "Tudo",
-  "Arte",
-  "Música",
-  "Literatura",
-  "Programação",
-  "Dança",
-  "Cinema",
-  "Culinária",
-  "Comunicação",
-  "Liderança",
-];
+import { CATEGORIES_DATA } from "@/config/categories";
 
 type SearchChallengeProps = {};
 
@@ -37,7 +25,7 @@ export default function SearchChallenge({}: SearchChallengeProps) {
     params.get("keyword") ?? ""
   );
   const [selectedCategory, setSelectedcategory] = useState(
-    params.get("category") ?? categories[0]
+    params.get("category") ?? CATEGORIES_DATA[0]
   );
 
   return (
@@ -50,11 +38,11 @@ export default function SearchChallenge({}: SearchChallengeProps) {
         opts={{
           align: "center",
           dragFree: true,
-          startIndex: categories.indexOf(selectedCategory) - 1,
+          startIndex: CATEGORIES_DATA.indexOf(selectedCategory) - 1,
         }}
       >
         <CarouselContent>
-          {categories.map((category) => (
+          {CATEGORIES_DATA.map((category) => (
             <CarouselItem key={category} className="basis-1/1">
               <Badge
                 key={category}
