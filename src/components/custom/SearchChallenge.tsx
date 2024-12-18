@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Carousel,
   CarouselContent,
@@ -11,7 +13,7 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Search } from "lucide-react";
-import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 const categories = [
   "Tudo",
@@ -29,12 +31,14 @@ const categories = [
 type SearchChallengeProps = {};
 
 export default function SearchChallenge({}: SearchChallengeProps) {
-  const [searchedChallenge, setSearchedChallenge] = useState("");
-  const [selectedCategory, setSelectedcategory] = useState(categories[0]);
+  const params = useSearchParams();
 
-  const changeCategory = (category: string) => {
-    setSelectedcategory(category);
-  };
+  const [searchedChallenge, setSearchedChallenge] = useState(
+    params.get("keyword") ?? ""
+  );
+  const [selectedCategory, setSelectedcategory] = useState(
+    params.get("category") ?? categories[0]
+  );
 
   return (
     <div className="flex flex-col w-full items-center gap-4">
@@ -54,7 +58,7 @@ export default function SearchChallenge({}: SearchChallengeProps) {
             <CarouselItem key={category} className="basis-1/1">
               <Badge
                 key={category}
-                onClick={() => changeCategory(category)}
+                onClick={() => setSelectedcategory(category)}
                 className={cn(
                   "cursor-pointer bg-purple-500 hover:bg-purple-600 hover:text-white p-2 transition-all ease-in delay-75",
                   category === selectedCategory &&
