@@ -8,7 +8,7 @@ type ChallengeCardProps = {
 
 export default function ChallengeCard({ challenge }: ChallengeCardProps) {
   return (
-    <Card className="flex-1">
+    <Card id="challenge-card" className="flex-1">
       <CardTitle className="flex items-end justify-end mt-2 mr-2 gap-1">
         <Badge className="bg-indigo-500 hover:bg-indigo-600 cursor-pointer">
           {challenge.type}

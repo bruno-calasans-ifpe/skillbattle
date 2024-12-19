@@ -1,20 +1,29 @@
 "use client";
 
+import ContentContainer from "@/components/custom/ContentContainer";
 import SearchChallenge from "@/components/custom/SearchChallenge";
+import Title from "@/components/custom/Title";
 import FeatureChallenges from "@/components/home/FeatureChallenges";
 import RecentChallenges from "@/components/home/RecentChallenges";
 import { CHALLENGE_DATA } from "@/config/challenges";
 
 export default function Home() {
   return (
-    <section className="flex flex-col gap-10 flex-1 items-center lg:max-w-[900px] md:max-w-[600px] m-auto p-5 mt-5">
+    <ContentContainer>
       <SearchChallenge />
-      <FeatureChallenges
-        showMoreUrl="/"
-        title="Desafios em destaque"
-        challenges={CHALLENGE_DATA}
-      />
-      <RecentChallenges challenges={CHALLENGE_DATA} />
-    </section>
+      <div className="flex flex-col gap-3 mb-5">
+        <Title>Desafios</Title>
+        <FeatureChallenges
+          showMoreUrl="/"
+          title="Desafios em destaque"
+          challenges={CHALLENGE_DATA}
+        />
+      </div>
+
+      <div className="flex flex-col gap-3 mb-5">
+        <Title>Desafios Recentes</Title>
+        <RecentChallenges challenges={CHALLENGE_DATA} />
+      </div>
+    </ContentContainer>
   );
 }
