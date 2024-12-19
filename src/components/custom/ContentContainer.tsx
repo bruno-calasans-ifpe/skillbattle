@@ -13,7 +13,7 @@ export default function ContentContainer({
     <section
       id="content-container"
       className={cn(
-        "flex flex-col gap-8 flex-1 lg:max-w-[900px] md:max-w-[600px] sm:max-w-[320px] m-auto p-5 mt-5",
+        "flex flex-col gap-5 flex-1 lg:max-w-[900px] md:max-w-[600px] sm:max-w-[320px] m-auto p-5 mt-5",
         classname
       )}
     >
