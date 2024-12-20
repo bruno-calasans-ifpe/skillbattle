@@ -6,3 +6,4 @@ export type Challenge = {
 };
 
 export type CategoryType = "normal" | "speed" | "score";
+export type ChallengeStatus = "win" | "lose" | "waiting";

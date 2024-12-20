@@ -1,18 +1,29 @@
+"use client";
+
 import type { Challenge } from "@/types/Challenge";
-import { Card, CardContent, CardFooter, CardTitle } from "../ui/card";
+import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "../ui/button";
-import { CircleUserRound, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 
-type ExpandedChallengeCardProps = {
+const randInt = (min: number, max: number) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+
+const MATCH_STATUS = [
+  <p className="text-emerald-500 text-sm font-bold">Venceu</p>,
+  <p className="text-red-500 text-sm font-bold">
+    Perdeu (classificação: {randInt(2, 10)})
+  </p>,
+  <p className="text-indigo-500 text-sm font-bold">Andamento</p>,
+];
+
+type MatchCardProps = {
   challenge: Challenge;
 };
 
-export default function ExpandedChallengeCard({
-  challenge,
-}: ExpandedChallengeCardProps) {
+export default function MatchCard({ challenge }: MatchCardProps) {
   return (
     <Card id="expanded-challenge-card" className="w-full">
       <CardTitle className="flex items-center justify-between gap-1 p-2 mt-1">
@@ -33,12 +44,10 @@ export default function ExpandedChallengeCard({
           <p>2 horas atrás</p>
         </div>
 
-        {/* player numbers */}
+        {/* match status */}
         <div className="flex gap-1 text-sm items-center font-normal ">
-          <p className="text-lg ">
-            <span>10</span>/<span>20</span>
-          </p>
-          <CircleUserRound size={20} />
+          {/*Hydration Error */}
+          <div>{MATCH_STATUS[randInt(0, 2)]}</div>
         </div>
       </CardTitle>
 
