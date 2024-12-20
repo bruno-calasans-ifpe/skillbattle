@@ -20,7 +20,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Title from "@/components/custom/Title";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { UserRoundPlus, UserRoundMinus } from "lucide-react";
+import { UserRoundPlus, UserRoundMinus, Brush } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -143,7 +143,9 @@ export default function UserProfile({}: UsserProfileProps) {
                 className="border-none cursor-pointer"
               >
                 <TableCell>
-                  <Badge color="red">{features.category}</Badge>
+                  <Badge className="bg-purple-500 hover:bg-purple-600">
+                    {features.category}
+                  </Badge>
                 </TableCell>
                 <TableCell>{features.ranking}</TableCell>
                 <TableCell>{features.wins}</TableCell>
@@ -161,10 +163,13 @@ export default function UserProfile({}: UsserProfileProps) {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Badge className="p-1 cursor-pointer">Jovem Artista</Badge>
+                <Badge className="p-1 cursor-pointer bg-red-500 hover:bg-red-600">
+                  <Brush size={20} />
+                  Jovem Artista
+                </Badge>
               </TooltipTrigger>
               <TooltipContent side="bottom">
-                <p className="text-lg">Jovem Artista</p>
+                <p className="text-sm font-bold">Jovem Artista</p>
                 <p>Ganhou por vencer 1 desafio de arte</p>
               </TooltipContent>
             </Tooltip>
