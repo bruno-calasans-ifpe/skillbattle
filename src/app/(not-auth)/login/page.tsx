@@ -17,6 +17,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import LoginForm from "./LoginForm";
 import { signIn } from "next-auth/react";
+import ContentContainer from "@/components/custom/ContentContainer";
 
 type RegisterPageProps = {};
 
@@ -32,7 +33,7 @@ export default function LoginPage({}: RegisterPageProps) {
   };
 
   return (
-    <section className="flex flex-1 items-center justify-center">
+    <ContentContainer>
       {showEmailForm && <LoginForm onGoBack={emailLoginFormToggle} />}
       <Card className={cn("flex gap-2 h-[400px]", showEmailForm && "hidden")}>
         <div className="flex flex-col">
@@ -89,6 +90,6 @@ export default function LoginPage({}: RegisterPageProps) {
           alt="welcome-register"
         />
       </Card>
-    </section>
+    </ContentContainer>
   );
 }

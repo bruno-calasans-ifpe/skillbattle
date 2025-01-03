@@ -1,6 +1,7 @@
 import type { Challenge } from "@/types/Challenge";
 import { Card, CardContent, CardFooter, CardTitle } from "../ui/card";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 type ChallengeCardProps = {
   challenge: Challenge;
@@ -22,9 +23,9 @@ export default function ChallengeCard({ challenge }: ChallengeCardProps) {
           </Badge>
         ))}
       </CardTitle>
-      <CardContent className="flex aspect-square items-end justify-center p-2 b border-b-2 border-purple-300 mx-1">
-        {/* <Image src={challenge.image} alt={challenge.name} fill /> */}
-        <img src={challenge.image} alt={challenge.name} className="h-32" />
+      <CardContent className="flex aspect-square items-end justify-center p-2 b border-b-2 border-purple-300 mx-1 relative">
+        <Image src={challenge.image} alt={challenge.name} fill />
+        {/* <img src={challenge.image} alt={challenge.name} className="h-32" /> */}
       </CardContent>
       <CardFooter className="flex justify-between flex-wrap items-center p-2 ">
         <p className="flex text-sm font-semibold flex-1 truncate">

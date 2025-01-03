@@ -25,7 +25,7 @@ export default function Header({ session }: HeaderProps) {
 
   return (
     <>
-      <header className=" text-white flex items-center justify-between p-4 bg-primary h-28 border-b-2 border-purple-600 gap-10">
+      <header className="text-white flex items-center justify-between p-4 bg-primary h-20 border-b-2 border-purple-600 gap-10">
         <SidebarProvider className={open ? "absolute" : "hidden"} open={open}>
           <AppSidebar onCloseMenu={toggleSideBar} />
         </SidebarProvider>

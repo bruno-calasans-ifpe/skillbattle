@@ -11,7 +11,7 @@ export default function CodeBtn({}: CodeBtnProps) {
       className="bg-emerald-600 hover:bg-emerald-700 group"
     >
       <Forward className="text-white " />
-      <p className="text-white font-bold">Entrar com código</p>
+      <p className="text-white font-bold">Código</p>
     </Button>
   );
 }
