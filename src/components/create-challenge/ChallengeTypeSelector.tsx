@@ -30,6 +30,7 @@ type ChallengeTypeSelectorProps = {
 export default function ChallengeTypeSelector({
   onTypeChange,
 }: ChallengeTypeSelectorProps) {
+  
   return (
     <div className="flex gap-1 items-center">
       <p className="text-sm">Tipo:</p>
