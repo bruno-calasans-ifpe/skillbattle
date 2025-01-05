@@ -6,6 +6,7 @@ import {
   SelectValue,
   SelectScrollDownButton,
 } from "@/components/ui/select";
+import useCreateChallengeStore from "@/store/createChallengeStore";
 import type { ChallengeType } from "@/types/Challenge";
 
 const challengeTypeData = [
@@ -23,18 +24,18 @@ const challengeTypeData = [
   },
 ];
 
-type ChallengeTypeSelectorProps = {
-  onTypeChange: (type: ChallengeType) => void;
-};
+export default function ChallengeTypeSelector() {
+  const { setChallengeType, resetDefaultRules } = useCreateChallengeStore();
 
-export default function ChallengeTypeSelector({
-  onTypeChange,
-}: ChallengeTypeSelectorProps) {
-  
+  const changeTypeHandler = (type: ChallengeType) => {
+    setChallengeType(type);
+    resetDefaultRules(type);
+  };
+
   return (
     <div className="flex gap-1 items-center">
       <p className="text-sm">Tipo:</p>
-      <Select defaultValue="normal" onValueChange={onTypeChange}>
+      <Select defaultValue="normal" onValueChange={changeTypeHandler}>
         <SelectTrigger className="w-fit h-6 p-2">
           <SelectValue placeholder="Tipo de Desafio" />
         </SelectTrigger>

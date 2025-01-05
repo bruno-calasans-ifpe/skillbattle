@@ -3,24 +3,23 @@
 import ChallengeTypeSelector from "@/components/create-challenge/ChallengeTypeSelector";
 import CreateChallengeForm from "@/components/create-challenge/CreateChallengeForm";
 import CreateNormalChallengeRules from "@/components/create-challenge/CreateNormalChallengeRules";
+import CreateScoreChallengeForm from "@/components/create-challenge/CreateScoreChallengeForm";
 import CreateScoreChallengeRules from "@/components/create-challenge/CreateScoreChallengeRules";
 import CreateSpeedChallengeRules from "@/components/create-challenge/CreateSpeedChallengeRules";
 import ContentContainer from "@/components/custom/ContentContainer";
 import Title from "@/components/custom/Title";
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ChallengeType } from "@/types/Challenge";
-import { useState } from "react";
+import useCreateChallengeStore from "@/store/createChallengeStore";
 
 export default function CreateChallengePage() {
-  const [selectedChallengeType, setSelectedChallengeType] =
-    useState<ChallengeType>("normal");
+  const { type, ...challenge } = useCreateChallengeStore();
+  console.log(challenge);
 
   return (
-    <ContentContainer>
+    <ContentContainer classname="mb-10">
       <Title>
         <p>Criar Desafio</p>
-        <ChallengeTypeSelector onTypeChange={setSelectedChallengeType} />
+        <ChallengeTypeSelector />
       </Title>
 
       {/*  */}
@@ -34,12 +33,13 @@ export default function CreateChallengePage() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="basic">
-          <CreateChallengeForm />
+          {type != "score" && <CreateChallengeForm />}
+          {type === "score" && <CreateScoreChallengeForm />}
         </TabsContent>
         <TabsContent value="rules">
-          {selectedChallengeType === "normal" && <CreateNormalChallengeRules />}
-          {selectedChallengeType === "speed" && <CreateSpeedChallengeRules />}
-          {selectedChallengeType === "score" && <CreateScoreChallengeRules />}
+          {type === "normal" && <CreateNormalChallengeRules />}
+          {type === "speed" && <CreateSpeedChallengeRules />}
+          {type === "score" && <CreateScoreChallengeRules />}
         </TabsContent>
       </Tabs>
     </ContentContainer>

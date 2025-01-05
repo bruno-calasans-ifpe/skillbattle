@@ -14,9 +14,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import CreateChallengeImageUpload from "./CreateChallengeImageUpload";
+import { cn } from "@/lib/utils";
+import { X } from "lucide-react";
+import { Reorder } from "framer-motion";
 import useCreateChallengeStore from "@/store/createChallengeStore";
 
-const createChallengeSchema = z
+const createScoreChallengeSchema = z
   .object({
     url: z
       .string({ required_error: "Url do desafio é obrigatório" })
@@ -28,35 +31,39 @@ const createChallengeSchema = z
   })
   .required();
 
-type CreateChallengeInputs = z.infer<typeof createChallengeSchema>;
+type CreateScoreChallengeInputs = z.infer<typeof createScoreChallengeSchema>;
 
-export default function CreateChallengeForm() {
-  const { updateChallenge } = useCreateChallengeStore();
-
-  const form = useForm<CreateChallengeInputs>({
-    resolver: zodResolver(createChallengeSchema),
+export default function CreateScoreChallengeForm() {
+  const {
+    challenges,
+    updateChallenge,
+    addChallenge,
+    removeChallenge,
+    setChallenges,
+  } = useCreateChallengeStore();
+  const form = useForm<CreateScoreChallengeInputs>({
+    resolver: zodResolver(createScoreChallengeSchema),
     defaultValues: {
       url: "",
       name: "",
     },
   });
 
-  function onSubmit(values: CreateChallengeInputs) {
+  function onSubmit(values: CreateScoreChallengeInputs) {
     console.log(values);
   }
 
   const changeFormHandler = () => {
-    const values = form.getValues();
-    updateChallenge(values);
+    const { challenge, ...input } = form.getValues();
+    updateChallenge({ ...input, challenges });
   };
 
   return (
     <Form {...form}>
       <form
-        id="create-challenge"
-        className="space-y-8"
         onSubmit={form.handleSubmit(onSubmit)}
         onChange={changeFormHandler}
+        className="space-y-8"
       >
         {/* Imagem */}
         <FormField
@@ -85,9 +92,9 @@ export default function CreateChallengeForm() {
               <FormControl>
                 <Input
                   {...field}
-                  id="challenge-name"
+                  id="challenge-pic"
                   type="text"
-                  placeholder="Nome de exibição do desafio"
+                  placeholder="Nome do desafio"
                 />
               </FormControl>
               <FormMessage />
@@ -101,16 +108,58 @@ export default function CreateChallengeForm() {
           name="challenge"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-bold">Desafio</FormLabel>
+              <FormLabel className="font-bold">Desafios</FormLabel>
               <FormControl>
-                <Input
-                  {...field}
-                  id="challenge"
-                  type="text"
-                  placeholder="O desafio para os jogadores"
-                />
+                {/* Challenge List */}
+                <div className="flex flex-col gap-2">
+                  <Reorder.Group values={challenges} onReorder={setChallenges}>
+                    <div
+                      className={cn(
+                        "flex flex-col gap-3 border-2 border-purple-500 p-2 rounded-md",
+                        challenges.length == 0 && "hidden"
+                      )}
+                    >
+                      {challenges.map((challenge, index) => (
+                        <Reorder.Item value={challenge} key={challenge}>
+                          <p className="text-sm italic font-bold flex justify-between items-center text-purple-700 bg-purple-300 p-2 rounded-md hover:bg-purple-600 cursor-move transition-all hover:text-purple-100">
+                            Desafio {index + 1}: {challenge}{" "}
+                            <span>
+                              <X
+                                className="hover:text-red-600 cursor-pointer text-red-500"
+                                onClick={() => removeChallenge(challenge)}
+                                size={20}
+                              />
+                            </span>
+                          </p>
+                        </Reorder.Item>
+                      ))}
+                    </div>
+                  </Reorder.Group>
+                  {/* Add challenge */}
+                  <div className="flex gap-1">
+                    <Input
+                      {...field}
+                      id="challenge"
+                      type="search"
+                      placeholder="Os desafios para os jogadores"
+                    />
+
+                    <Button
+                      type="button"
+                      onClick={() => addChallenge(form.getValues().challenge)}
+                      className="bg-purple-500 hover:bg-purple-600"
+                    >
+                      Adicionar
+                    </Button>
+                  </div>
+                </div>
               </FormControl>
               <FormMessage />
+              <FormDescription>
+                Adicione quantos desafios você quiser. Dica: você pode arrastar
+                o desafio para alterar a ordem que serão feitos, caso escolha
+                seleção em 'ordem' (em regras).
+              </FormDescription>
             </FormItem>
           )}
         />
@@ -125,7 +174,6 @@ export default function CreateChallengeForm() {
               <FormControl>
                 <Textarea
                   {...field}
-                  id="challenge-desc"
                   className="h-32 resize-none"
                   placeholder="Descrição do desafio"
                 />
@@ -137,14 +185,12 @@ export default function CreateChallengeForm() {
 
         <div className="flex flex-1 gap-3">
           <Button
-            id="reset-challenge"
             type="reset"
             className="flex-1 bg-indigo-500 font-bold hover:bg-indigo-600"
           >
             Limpar
           </Button>
           <Button
-            id="submit-challenge"
             type="submit"
             className="flex-1 bg-emerald-500 font-bold hover:bg-emerald-600"
           >

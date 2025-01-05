@@ -11,13 +11,17 @@ import {
   FormDescription,
 } from "@/components/ui/form";
 import { Input } from "../ui/input";
+import { SpeedChallengeRules } from "@/types/Challenge";
+import { useEffect } from "react";
+import { DEFAULT_SPEED_RULES } from "./defaultChallengeRules";
+import useCreateChallengeStore from "@/store/createChallengeStore";
 
 const createSpeedChallengeRulesSchema = z
   .object({
-    classifications: z.number().min(2).nonnegative(),
+    classifications: z.number().min(1).nonnegative(),
     maxPlayerNum: z.number().min(2).nonnegative(),
-    startDate: z.date().min(new Date(Date.now())),
-    endDate: z.date(),
+    // startDate: z.date().min(new Date(Date.now())),
+    // endDate: z.date(),
   })
   .required();
 
@@ -25,37 +29,38 @@ type CreateSpeedChallengeRulesInputs = z.infer<
   typeof createSpeedChallengeRulesSchema
 >;
 
-type CreateSpeedChallengeRulesProps = {};
-
-export default function CreateSpeedChallengeRules({}: CreateSpeedChallengeRulesProps) {
+export default function CreateSpeedChallengeRules() {
+  const { type, setChallengeRules, resetDefaultRules } =
+    useCreateChallengeStore();
   const form = useForm<CreateSpeedChallengeRulesInputs>({
     resolver: zodResolver(createSpeedChallengeRulesSchema),
     defaultValues: {
-      classifications: 2,
-      maxPlayerNum: 2,
-      startDate: new Date(),
-      endDate: new Date(),
+      ...DEFAULT_SPEED_RULES,
     },
   });
 
-  function onSubmit(values: CreateSpeedChallengeRulesInputs) {
-    console.log(values);
-  }
+  const changeRulesHandler = () => {
+    const { maxPlayerNum, classifications } = form.getValues();
+    setChallengeRules({
+      maxPlayerNum: Number(maxPlayerNum),
+      classifications: Number(classifications),
+    });
+  };
+
+  useEffect(() => {
+    if (type == "speed") resetDefaultRules("speed");
+  }, [type]);
 
   return (
     <Form {...form}>
-      <form
-        id="rules"
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8"
-      >
+      <form id="rules" className="space-y-8" onChange={changeRulesHandler}>
         {/* Número máximo de classificações*/}
         <FormField
           control={form.control}
           name="classifications"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Classificações</FormLabel>
+              <FormLabel className="font-bold">Classificações</FormLabel>
               <FormControl>
                 <Input
                   {...field}
@@ -65,7 +70,7 @@ export default function CreateSpeedChallengeRules({}: CreateSpeedChallengeRulesP
               </FormControl>
               <FormMessage />
               <FormDescription>
-                Quantos jogadores serão classificados (mínimo é 2)
+                Quantos jogadores serão classificados (mínimo é 1)
               </FormDescription>
             </FormItem>
           )}
@@ -77,7 +82,9 @@ export default function CreateSpeedChallengeRules({}: CreateSpeedChallengeRulesP
           name="maxPlayerNum"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Número máximo de jogadores</FormLabel>
+              <FormLabel className="font-bold">
+                Número máximo de jogadores
+              </FormLabel>
               <FormControl>
                 <Input
                   {...field}
@@ -94,7 +101,7 @@ export default function CreateSpeedChallengeRules({}: CreateSpeedChallengeRulesP
           )}
         />
         {/* Data Inicial */}
-        <FormField
+        {/* <FormField
           control={form.control}
           name="startDate"
           render={({ field }) => (
@@ -111,10 +118,10 @@ export default function CreateSpeedChallengeRules({}: CreateSpeedChallengeRulesP
               <FormDescription>Quando o desafio vai começar</FormDescription>
             </FormItem>
           )}
-        />
+        /> */}
 
         {/* Data Final */}
-        <FormField
+        {/* <FormField
           control={form.control}
           name="startDate"
           render={({ field }) => (
@@ -131,7 +138,7 @@ export default function CreateSpeedChallengeRules({}: CreateSpeedChallengeRulesP
               <FormDescription>Quando o desafio vai terminar</FormDescription>
             </FormItem>
           )}
-        />
+        /> */}
       </form>
     </Form>
   );
