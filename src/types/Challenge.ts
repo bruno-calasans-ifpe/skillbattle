@@ -1,5 +1,5 @@
 export type Challenge = {
-  name: string;
+  title: string;
   categories: string[];
   type: ChallengeType;
   image: string;
@@ -7,9 +7,9 @@ export type Challenge = {
   challenges: string[];
 };
 
-export type ChallengeType = "normal" | "speed" | "score";
-export type ChallengeStatus = "win" | "lose" | "waiting";
-export type ScoreSelectionType = "order" | "random";
+export type ChallengeType = 'normal' | 'speed' | 'score';
+export type ChallengeStatus = 'win' | 'lose' | 'waiting';
+export type ScoreSelectionType = 'order' | 'random';
 
 export type NormalChallengeRules = {
   maxPlayerNum: number;

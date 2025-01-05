@@ -1,6 +1,7 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+
 import {
   Form,
   FormControl,
@@ -9,22 +10,23 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
+  SelectScrollDownButton,
   SelectTrigger,
   SelectValue,
-  SelectScrollDownButton,
-} from "@/components/ui/select";
-import { Input } from "../ui/input";
-import { DEFAULT_SCORE_RULES } from "./defaultChallengeRules";
-import useCreateChallengeStore from "@/store/createChallengeStore";
+} from '@/components/ui/select';
+import { DEFAULT_SCORE_RULES } from '@/config/defaultRules';
+import useCreateChallengeStore from '@/store/createChallengeStore';
+
+import { Input } from '../ui/input';
 
 const createScoreChallengeRulesSchema = z
   .object({
-    selectionType: z.enum(["order", "random"]),
+    selectionType: z.enum(['order', 'random']),
     maxRounds: z.number().nonnegative(),
     maxRoundTime: z.number().nonnegative().min(1),
     maxPlayerNum: z.number().min(2).nonnegative(),
@@ -37,12 +39,12 @@ type CreateScoreChallengeRulesInputs = z.infer<
 
 const challengeSelectionData = [
   {
-    label: "Ordem",
-    value: "order",
+    label: 'Ordem',
+    value: 'order',
   },
   {
-    label: "Aleatória",
-    value: "random",
+    label: 'Aleatória',
+    value: 'random',
   },
 ];
 
@@ -69,23 +71,23 @@ export default function CreateScoreChallengeRules() {
   return (
     <Form {...form}>
       <form
-        id="score-rules"
-        className="space-y-8"
+        id='score-rules'
+        className='space-y-8'
         onChange={changeRulesHandler}
       >
         {/* Seleção dos Desafios*/}
         <FormField
           control={form.control}
-          name="selectionType"
+          name='selectionType'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-bold">Seleção dos Desafios</FormLabel>
+              <FormLabel className='font-bold'>Seleção dos Desafios</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger className='w-full'>
                     <SelectValue
                       defaultValue={field.value}
                       onChange={field.onChange}
@@ -97,7 +99,7 @@ export default function CreateScoreChallengeRules() {
                         {label}
                       </SelectItem>
                     ))}
-                    <SelectScrollDownButton className="" />
+                    <SelectScrollDownButton className='' />
                   </SelectContent>
                 </Select>
               </FormControl>
@@ -112,15 +114,15 @@ export default function CreateScoreChallengeRules() {
         {/* Número de rodadas */}
         <FormField
           control={form.control}
-          name="maxRounds"
+          name='maxRounds'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-bold">Rounds</FormLabel>
+              <FormLabel className='font-bold'>Rounds</FormLabel>
               <FormControl>
                 <Input
                   {...field}
-                  id="score-challenge-max-rounds"
-                  type="number"
+                  id='score-challenge-max-rounds'
+                  type='number'
                   min={2}
                 />
               </FormControl>
@@ -135,17 +137,17 @@ export default function CreateScoreChallengeRules() {
         {/* Tempo para cada round */}
         <FormField
           control={form.control}
-          name="maxRoundTime"
+          name='maxRoundTime'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-bold">
+              <FormLabel className='font-bold'>
                 Tempo de Round (em minutos)
               </FormLabel>
               <FormControl>
                 <Input
                   {...field}
-                  id="score-challenge-max-round-time"
-                  type="number"
+                  id='score-challenge-max-round-time'
+                  type='number'
                   min={2}
                 />
               </FormControl>
@@ -160,17 +162,17 @@ export default function CreateScoreChallengeRules() {
         {/* Número máximo de jogadores */}
         <FormField
           control={form.control}
-          name="maxPlayerNum"
+          name='maxPlayerNum'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-bold">
+              <FormLabel className='font-bold'>
                 Número máximo de jogadores
               </FormLabel>
               <FormControl>
                 <Input
                   {...field}
-                  id="score-challenge-max-player-numbers"
-                  type="number"
+                  id='score-challenge-max-player-numbers'
+                  type='number'
                   min={2}
                 />
               </FormControl>

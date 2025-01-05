@@ -1,6 +1,10 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Reorder } from 'framer-motion';
+import { X } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -9,22 +13,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import CreateChallengeImageUpload from "./CreateChallengeImageUpload";
-import { cn } from "@/lib/utils";
-import { X } from "lucide-react";
-import { Reorder } from "framer-motion";
-import useCreateChallengeStore from "@/store/createChallengeStore";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { cn } from '@/lib/utils';
+import useCreateChallengeStore from '@/store/createChallengeStore';
+
+import CreateChallengeImageUpload from './CreateChallengeImageUpload';
 
 const createScoreChallengeSchema = z
   .object({
     url: z
-      .string({ required_error: "Url do desafio é obrigatório" })
-      .url("Url inválida"),
-    name: z.string({ required_error: "Nome do desafio é obrigatório" }),
+      .string({ required_error: 'Url do desafio é obrigatório' })
+      .url('Url inválida'),
+    title: z.string({ required_error: 'Nome do desafio é obrigatório' }),
     challenge: z.string(),
     category: z.string(),
     desc: z.string(),
@@ -44,8 +46,8 @@ export default function CreateScoreChallengeForm() {
   const form = useForm<CreateScoreChallengeInputs>({
     resolver: zodResolver(createScoreChallengeSchema),
     defaultValues: {
-      url: "",
-      name: "",
+      url: '',
+      title: '',
     },
   });
 
@@ -63,15 +65,15 @@ export default function CreateScoreChallengeForm() {
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         onChange={changeFormHandler}
-        className="space-y-8"
+        className='space-y-8'
       >
         {/* Imagem */}
         <FormField
           control={form.control}
-          name="url"
+          name='url'
           render={() => (
             <FormItem>
-              <FormLabel className="font-bold">Imagem</FormLabel>
+              <FormLabel className='font-bold'>Imagem</FormLabel>
               <FormControl>
                 <CreateChallengeImageUpload />
               </FormControl>
@@ -82,19 +84,19 @@ export default function CreateScoreChallengeForm() {
             </FormItem>
           )}
         />
-        {/* Nome */}
+        {/* Título */}
         <FormField
           control={form.control}
-          name="name"
+          name='title'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-bold">Nome</FormLabel>
+              <FormLabel className='font-bold'>Título</FormLabel>
               <FormControl>
                 <Input
                   {...field}
-                  id="challenge-pic"
-                  type="text"
-                  placeholder="Nome do desafio"
+                  id='challenge-title'
+                  type='text'
+                  placeholder='Título do desafio'
                 />
               </FormControl>
               <FormMessage />
@@ -105,27 +107,27 @@ export default function CreateScoreChallengeForm() {
         {/*  Desafio*/}
         <FormField
           control={form.control}
-          name="challenge"
+          name='challenge'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-bold">Desafios</FormLabel>
+              <FormLabel className='font-bold'>Desafios</FormLabel>
               <FormControl>
                 {/* Challenge List */}
-                <div className="flex flex-col gap-2">
+                <div className='flex flex-col gap-2'>
                   <Reorder.Group values={challenges} onReorder={setChallenges}>
                     <div
                       className={cn(
-                        "flex flex-col gap-3 border-2 border-purple-500 p-2 rounded-md",
-                        challenges.length == 0 && "hidden"
+                        'flex flex-col gap-3 border-2 border-purple-500 p-2 rounded-md',
+                        challenges.length === 0 && 'hidden',
                       )}
                     >
                       {challenges.map((challenge, index) => (
                         <Reorder.Item value={challenge} key={challenge}>
-                          <p className="text-sm italic font-bold flex justify-between items-center text-purple-700 bg-purple-300 p-2 rounded-md hover:bg-purple-600 cursor-move transition-all hover:text-purple-100">
-                            Desafio {index + 1}: {challenge}{" "}
+                          <p className='text-sm italic font-bold flex justify-between items-center text-purple-700 bg-purple-300 p-2 rounded-md hover:bg-purple-600 cursor-move transition-all hover:text-purple-100'>
+                            Desafio {index + 1}: {challenge}{' '}
                             <span>
                               <X
-                                className="hover:text-red-600 cursor-pointer text-red-500"
+                                className='hover:text-red-600 cursor-pointer text-red-500'
                                 onClick={() => removeChallenge(challenge)}
                                 size={20}
                               />
@@ -136,18 +138,18 @@ export default function CreateScoreChallengeForm() {
                     </div>
                   </Reorder.Group>
                   {/* Add challenge */}
-                  <div className="flex gap-1">
+                  <div className='flex gap-1'>
                     <Input
                       {...field}
-                      id="challenge"
-                      type="search"
-                      placeholder="Os desafios para os jogadores"
+                      id='challenge'
+                      type='search'
+                      placeholder='Os desafios para os jogadores'
                     />
 
                     <Button
-                      type="button"
+                      type='button'
                       onClick={() => addChallenge(form.getValues().challenge)}
-                      className="bg-purple-500 hover:bg-purple-600"
+                      className='bg-purple-500 hover:bg-purple-600'
                     >
                       Adicionar
                     </Button>
@@ -167,15 +169,15 @@ export default function CreateScoreChallengeForm() {
         {/*  Decrição*/}
         <FormField
           control={form.control}
-          name="desc"
+          name='desc'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-bold">Descrição</FormLabel>
+              <FormLabel className='font-bold'>Descrição</FormLabel>
               <FormControl>
                 <Textarea
                   {...field}
-                  className="h-32 resize-none"
-                  placeholder="Descrição do desafio"
+                  className='h-32 resize-none'
+                  placeholder='Descrição do desafio'
                 />
               </FormControl>
               <FormMessage />
@@ -183,16 +185,16 @@ export default function CreateScoreChallengeForm() {
           )}
         />
 
-        <div className="flex flex-1 gap-3">
+        <div className='flex flex-1 gap-3'>
           <Button
-            type="reset"
-            className="flex-1 bg-indigo-500 font-bold hover:bg-indigo-600"
+            type='reset'
+            className='flex-1 bg-indigo-500 font-bold hover:bg-indigo-600'
           >
             Limpar
           </Button>
           <Button
-            type="submit"
-            className="flex-1 bg-emerald-500 font-bold hover:bg-emerald-600"
+            type='submit'
+            className='flex-1 bg-emerald-500 font-bold hover:bg-emerald-600'
           >
             Criar desafio
           </Button>

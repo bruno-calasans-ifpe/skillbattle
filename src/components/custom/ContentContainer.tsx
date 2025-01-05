@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 type ContentContainerProps = {
   children: React.ReactNode;
@@ -11,10 +11,10 @@ export default function ContentContainer({
 }: ContentContainerProps) {
   return (
     <section
-      id="content-container"
+      id='content-container'
       className={cn(
-        "flex flex-col gap-5 flex-1 lg:max-w-[1000px] md:max-w-[800px] sm:max-w-[320px] m-auto p-5 mt-5",
-        classname
+        'flex flex-col gap-5 flex-1 lg:max-w-[1000px] md:max-w-[800px] sm:max-w-[320px] m-auto p-5 mt-5',
+        classname,
       )}
     >
       {children}

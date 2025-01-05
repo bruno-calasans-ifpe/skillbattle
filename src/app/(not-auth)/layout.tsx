@@ -1,5 +1,5 @@
-import { getServerSession } from "next-auth/next";
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation';
+import { getServerSession } from 'next-auth/next';
 
 export default async function NotAuthLayout({
   children,
@@ -8,7 +8,7 @@ export default async function NotAuthLayout({
 }>) {
   const session = await getServerSession();
 
-  if (session) return redirect("/");
+  if (session) return redirect('/');
 
   return children;
 }

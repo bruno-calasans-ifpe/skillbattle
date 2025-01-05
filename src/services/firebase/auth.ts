@@ -1,19 +1,18 @@
-
-import app from "./app";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
-  signInWithPopup,
+  getAuth,
   GoogleAuthProvider,
+  signInWithPopup,
   signOut,
-  PopupRedirectResolver,
-} from "firebase/auth";
+} from 'firebase/auth';
+
+import app from './app';
 
 const auth = getAuth(app);
 
 const googleProvider = new GoogleAuthProvider();
-googleProvider.addScope("email");
-googleProvider.addScope("profile");
+googleProvider.addScope('email');
+googleProvider.addScope('profile');
 
 export async function registerWithEmail(email: string, password: string) {
   return createUserWithEmailAndPassword(auth, email, password);

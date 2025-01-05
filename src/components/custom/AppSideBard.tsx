@@ -1,31 +1,31 @@
+import { SiDiscord, SiInstagram, SiX } from '@icons-pack/react-simple-icons';
+import {
+  Component,
+  Headset,
+  Home,
+  Info,
+  MessageCircleQuestion,
+  Smartphone,
+  Telescope,
+  Trophy,
+  Users,
+  X,
+} from 'lucide-react';
+
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarHeader,
-  SidebarGroupLabel,
   SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
-  SidebarMenuItem,
   SidebarMenuButton,
-} from "@/components/ui/sidebar";
+  SidebarMenuItem,
+} from '@/components/ui/sidebar';
 
-import {
-  Home,
-  Trophy,
-  Telescope,
-  Headset,
-  MessageCircleQuestion,
-  Smartphone,
-  Users,
-  Info,
-  X,
-  Component,
-} from "lucide-react";
-
-import { SiInstagram, SiDiscord, SiX } from "@icons-pack/react-simple-icons";
-import { Button } from "../ui/button";
+import { Button } from '../ui/button';
 
 type AppSidebarProps = {
   onCloseMenu: () => void;
@@ -35,19 +35,19 @@ export default function AppSidebar({ onCloseMenu }: AppSidebarProps) {
   return (
     <Sidebar>
       <SidebarHeader />
-      <div className="flex items-center justify-between p-2">
-        <div className="flex items-center gap-1">
-          <Component className="text-purple-600 group-hover/btn:text-red-600" />
-          <p className="text-xl text-purple-600">SkillBattle</p>
+      <div className='flex items-center justify-between p-2'>
+        <div className='flex items-center gap-1'>
+          <Component className='text-purple-600 group-hover/btn:text-red-600' />
+          <p className='text-xl text-purple-600'>SkillBattle</p>
         </div>
         <Button
           onClick={onCloseMenu}
-          variant="ghost"
-          className="group/btn hover:bg-transparent cursor-pointer rotate-90 hover:rotate-12 transition-all ease-in-out duration-300"
-          size="icon"
+          variant='ghost'
+          className='group/btn hover:bg-transparent cursor-pointer rotate-90 hover:rotate-12 transition-all ease-in-out duration-300'
+          size='icon'
           asChild
         >
-          <X size={20} className="group-hover/btn:text-red-600 " />
+          <X size={20} className='group-hover/btn:text-red-600 ' />
         </Button>
       </div>
 
@@ -59,7 +59,7 @@ export default function AppSidebar({ onCloseMenu }: AppSidebarProps) {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href="/">
+                <a href='/'>
                   <Home />
                   <span>Home</span>
                 </a>
@@ -67,7 +67,7 @@ export default function AppSidebar({ onCloseMenu }: AppSidebarProps) {
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href="/explore">
+                <a href='/explore'>
                   <Telescope />
                   <span>Explore</span>
                 </a>
@@ -75,7 +75,7 @@ export default function AppSidebar({ onCloseMenu }: AppSidebarProps) {
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href="/ranking">
+                <a href='/ranking'>
                   <Trophy />
                   <span>Ranking</span>
                 </a>
@@ -92,7 +92,7 @@ export default function AppSidebar({ onCloseMenu }: AppSidebarProps) {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href="/suport">
+                <a href='/suport'>
                   <Headset />
                   <span>Suporte</span>
                 </a>
@@ -100,7 +100,7 @@ export default function AppSidebar({ onCloseMenu }: AppSidebarProps) {
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href="/help-center">
+                <a href='/help-center'>
                   <MessageCircleQuestion />
                   <span>Central de ajuda</span>
                 </a>
@@ -117,7 +117,7 @@ export default function AppSidebar({ onCloseMenu }: AppSidebarProps) {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href="/about-us">
+                <a href='/about-us'>
                   <Info />
                   <span>Sobre nós</span>
                 </a>
@@ -125,7 +125,7 @@ export default function AppSidebar({ onCloseMenu }: AppSidebarProps) {
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href="/our-team">
+                <a href='/our-team'>
                   <Users />
                   <span>Nossa Equipe</span>
                 </a>
@@ -134,7 +134,7 @@ export default function AppSidebar({ onCloseMenu }: AppSidebarProps) {
 
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href="/contact">
+                <a href='/contact'>
                   <Smartphone />
                   <span>Contate-nos</span>
                 </a>
@@ -151,7 +151,7 @@ export default function AppSidebar({ onCloseMenu }: AppSidebarProps) {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href="http://www.discord.com/asdasdsa">
+                <a href='http://www.discord.com/asdasdsa'>
                   <SiDiscord />
                   <span>Discord</span>
                 </a>
@@ -159,7 +159,7 @@ export default function AppSidebar({ onCloseMenu }: AppSidebarProps) {
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href="http://www.instagram.com/asdasdsa">
+                <a href='http://www.instagram.com/asdasdsa'>
                   <SiInstagram />
                   <span>Instagram</span>
                 </a>
@@ -168,7 +168,7 @@ export default function AppSidebar({ onCloseMenu }: AppSidebarProps) {
 
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href="http://www.x.com/asdasdsa">
+                <a href='http://www.x.com/asdasdsa'>
                   <SiX />
                   <span>Twitter</span>
                 </a>

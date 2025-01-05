@@ -1,13 +1,14 @@
-import { Challenge, ChallengeRules, ChallengeType } from "@/types/Challenge";
-import { create } from "zustand";
+import { create } from 'zustand';
+
 import {
   DEFAULT_NORMAL_RULES,
   DEFAULT_SCORE_RULES,
   DEFAULT_SPEED_RULES,
-} from "@/components/create-challenge/defaultChallengeRules";
+} from '@/config/defaultRules';
+import { Challenge, ChallengeRules, ChallengeType } from '@/types/Challenge';
 
 type CreateChallengeState = {
-  name: string;
+  title: string;
   challenges: string[];
   categories: string[];
   type: ChallengeType;
@@ -30,11 +31,11 @@ type CreateChallengeStore = CreateChallengeState & CreateChallengeActions;
 
 export const createChallengeStoreInitialState: CreateChallengeState &
   Challenge = {
-  name: "",
+  title: '',
   categories: [],
   challenges: [],
-  image: "",
-  type: "normal",
+  image: '',
+  type: 'normal',
   rules: DEFAULT_NORMAL_RULES,
 };
 
@@ -50,11 +51,11 @@ const useCreateChallengeStore = create<CreateChallengeStore>()((set, get) => ({
     set((state) => ({ ...state, rules: newRules }), true);
   },
   resetDefaultRules(type) {
-    if (type === "normal")
+    if (type === 'normal')
       set((state) => ({ ...state, rules: DEFAULT_NORMAL_RULES }), true);
-    if (type === "speed")
+    if (type === 'speed')
       set((state) => ({ ...state, rules: DEFAULT_SPEED_RULES }), true);
-    if (type === "score")
+    if (type === 'score')
       set((state) => ({ ...state, rules: DEFAULT_SCORE_RULES }), true);
   },
   clear() {
@@ -63,7 +64,7 @@ const useCreateChallengeStore = create<CreateChallengeStore>()((set, get) => ({
   addChallenge(challenge) {
     const challenges = get().challenges;
     const foundChallenge = challenges.find(
-      (c) => c.toLowerCase().trim() === challenge.toLowerCase().trim()
+      (c) => c.toLowerCase().trim() === challenge.toLowerCase().trim(),
     );
 
     if (foundChallenge) {
@@ -75,7 +76,7 @@ const useCreateChallengeStore = create<CreateChallengeStore>()((set, get) => ({
   removeChallenge(challenge) {
     const challenges = get().challenges;
     const updatedChallenges = challenges.filter(
-      (c) => c.toLowerCase() !== challenge
+      (c) => c.toLowerCase() !== challenge,
     );
     set(() => ({ challenges: updatedChallenges }));
     return true;

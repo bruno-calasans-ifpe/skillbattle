@@ -1,4 +1,4 @@
-import { FirebaseOptions, initializeApp } from "firebase/app";
+import { FirebaseOptions, initializeApp } from 'firebase/app';
 
 // Your web app's Firebase configuration
 const FIREBASE_CONFIG: FirebaseOptions = {

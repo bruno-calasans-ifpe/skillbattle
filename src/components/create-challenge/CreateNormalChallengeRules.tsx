@@ -1,6 +1,7 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+
 import {
   Form,
   FormControl,
@@ -9,10 +10,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "../ui/input";
-import { DEFAULT_NORMAL_RULES } from "./defaultChallengeRules";
-import useCreateChallengeStore from "@/store/createChallengeStore";
+} from '@/components/ui/form';
+import { DEFAULT_NORMAL_RULES } from '@/config/defaultRules';
+import useCreateChallengeStore from '@/store/createChallengeStore';
+
+import { Input } from '../ui/input';
 
 const createNormalChallengeRulesSchema = z
   .object({
@@ -42,21 +44,21 @@ export default function CreateNormalChallengeRules() {
 
   return (
     <Form {...form}>
-      <form id="rules" onChange={changeRulesHandler} className="space-y-8 mt-4">
+      <form id='rules' onChange={changeRulesHandler} className='space-y-8 mt-4'>
         {/* Imagem */}
         <FormField
           control={form.control}
-          name="maxPlayerNum"
+          name='maxPlayerNum'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-bold">
+              <FormLabel className='font-bold'>
                 Número máximo de jogadores
               </FormLabel>
               <FormControl>
                 <Input
                   {...field}
-                  id="normal-challenge-max-player-numbers"
-                  type="number"
+                  id='normal-challenge-max-player-numbers'
+                  type='number'
                   min={2}
                 />
               </FormControl>

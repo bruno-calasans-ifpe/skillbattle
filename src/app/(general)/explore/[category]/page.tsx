@@ -1,4 +1,6 @@
-import { CHALLENGE_DATA } from "@/config/challenges";
+import ContentContainer from '@/components/custom/ContentContainer';
+import ExpandedChallengeCard from '@/components/custom/ExpandedChallengeCard';
+import Title from '@/components/custom/Title';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,10 +8,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import ExpandedChallengeCard from "@/components/custom/ExpandedChallengeCard";
-import Title from "@/components/custom/Title";
-import ContentContainer from "@/components/custom/ContentContainer";
+} from '@/components/ui/breadcrumb';
+import { CHALLENGE_DATA } from '@/config/challenges';
 
 type ExplorePageProps = {
   params: Promise<{ category: string }>;
@@ -24,11 +24,11 @@ export default async function ExploreCategoryPage({
     <ContentContainer>
       <Title>
         <Breadcrumb>
-          <BreadcrumbList className="text-xl">
+          <BreadcrumbList className='text-xl'>
             <BreadcrumbItem>
               <BreadcrumbLink
-                className="text-purple-500 hover:text-purple-800"
-                href="/explore"
+                className='text-purple-500 hover:text-purple-800'
+                href='/explore'
               >
                 Explore
               </BreadcrumbLink>

@@ -1,10 +1,11 @@
-import { GOOGLE_CLIENT_ID, GOOGLE_SECRET_ID } from "@/config/env";
-import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+import { FirestoreAdapter } from '@auth/firebase-adapter';
+import NextAuth from 'next-auth';
 // import Nodemailer from "next-auth/providers/email";
-import EmailProvider from "next-auth/providers/email";
-import { FirestoreAdapter } from "@auth/firebase-adapter";
-import firebaseApp from "@/services/firebase/app";
+import EmailProvider from 'next-auth/providers/email';
+import GoogleProvider from 'next-auth/providers/google';
+
+import { GOOGLE_CLIENT_ID, GOOGLE_SECRET_ID } from '@/config/env';
+import firebaseApp from '@/services/firebase/app';
 
 const handler = NextAuth({
   providers: [
@@ -36,12 +37,12 @@ const handler = NextAuth({
     },
   },
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   pages: {
-    signIn: "/",
-    verifyRequest: "/verify-email",
+    signIn: '/',
+    verifyRequest: '/verify-email',
   },
 });
 

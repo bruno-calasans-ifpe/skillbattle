@@ -1,27 +1,26 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  FormDescription,
-} from "@/components/ui/form";
-import { Input } from "../ui/input";
-import { SpeedChallengeRules } from "@/types/Challenge";
-import { useEffect } from "react";
-import { DEFAULT_SPEED_RULES } from "./defaultChallengeRules";
-import useCreateChallengeStore from "@/store/createChallengeStore";
+} from '@/components/ui/form';
+import { DEFAULT_SPEED_RULES } from '@/config/defaultRules';
+import useCreateChallengeStore from '@/store/createChallengeStore';
+
+import { Input } from '../ui/input';
 
 const createSpeedChallengeRulesSchema = z
   .object({
     classifications: z.number().min(1).nonnegative(),
     maxPlayerNum: z.number().min(2).nonnegative(),
-    // startDate: z.date().min(new Date(Date.now())),
-    // endDate: z.date(),
   })
   .required();
 
@@ -48,24 +47,24 @@ export default function CreateSpeedChallengeRules() {
   };
 
   useEffect(() => {
-    if (type == "speed") resetDefaultRules("speed");
+    if (type == 'speed') resetDefaultRules('speed');
   }, [type]);
 
   return (
     <Form {...form}>
-      <form id="rules" className="space-y-8" onChange={changeRulesHandler}>
+      <form id='rules' className='space-y-8' onChange={changeRulesHandler}>
         {/* Número máximo de classificações*/}
         <FormField
           control={form.control}
-          name="classifications"
+          name='classifications'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-bold">Classificações</FormLabel>
+              <FormLabel className='font-bold'>Classificações</FormLabel>
               <FormControl>
                 <Input
                   {...field}
-                  id="speed-challenge-classifications"
-                  type="number"
+                  id='speed-challenge-classifications'
+                  type='number'
                 />
               </FormControl>
               <FormMessage />
@@ -79,17 +78,17 @@ export default function CreateSpeedChallengeRules() {
         {/* Número máximo de jogadores */}
         <FormField
           control={form.control}
-          name="maxPlayerNum"
+          name='maxPlayerNum'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-bold">
+              <FormLabel className='font-bold'>
                 Número máximo de jogadores
               </FormLabel>
               <FormControl>
                 <Input
                   {...field}
-                  id="speed-challenge-max-player-numbers"
-                  type="number"
+                  id='speed-challenge-max-player-numbers'
+                  type='number'
                   min={2}
                 />
               </FormControl>

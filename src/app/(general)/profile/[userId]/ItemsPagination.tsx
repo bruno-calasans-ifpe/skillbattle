@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import {
   Pagination,
   PaginationContent,
@@ -6,8 +8,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination";
-import { useEffect, useState } from "react";
+} from '@/components/ui/pagination';
 
 type ItemPaginationProps<Item> = {
   items: Item[];
@@ -36,11 +37,11 @@ export default function ItemsPagination<Item>({
     return nextIndex;
   };
 
-  const goToPage = (pageNum: number) => {
-    setCurrentPage(pageNum);
+  const goToPage = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
     const currentItems = items.slice(
-      calcPreviousIndex(pageNum),
-      calcNextIndex(pageNum)
+      calcPreviousIndex(pageNumber),
+      calcNextIndex(pageNumber),
     );
     onPageChange(currentItems);
   };
@@ -50,7 +51,7 @@ export default function ItemsPagination<Item>({
     setCurrentPage(nextPage);
     const currentItems = items.slice(
       calcPreviousIndex(nextPage),
-      calcNextIndex(nextPage)
+      calcNextIndex(nextPage),
     );
     onPageChange(currentItems);
   };
@@ -60,7 +61,7 @@ export default function ItemsPagination<Item>({
     setCurrentPage(previousPage);
     const currentItems = items.slice(
       calcPreviousIndex(previousPage),
-      calcNextIndex(previousPage)
+      calcNextIndex(previousPage),
     );
     onPageChange(currentItems);
   };
@@ -76,12 +77,12 @@ export default function ItemsPagination<Item>({
         <PaginationItem
           key={index}
           onClick={() => goToPage(index)}
-          className="cursor-pointer"
+          className='cursor-pointer'
         >
           <PaginationLink isActive={currentPage === index}>
             {index}
           </PaginationLink>
-        </PaginationItem>
+        </PaginationItem>,
       );
     }
     return pageButtons;
@@ -97,9 +98,9 @@ export default function ItemsPagination<Item>({
         {/* Previous button */}
         <PaginationItem hidden={!canGoBack}>
           <PaginationPrevious
-            className="cursor-pointer"
+            className='cursor-pointer'
             onClick={goNextPage}
-            content="voltar"
+            content='voltar'
           />
         </PaginationItem>
 
@@ -108,9 +109,9 @@ export default function ItemsPagination<Item>({
         {/* Next Button */}
         <PaginationItem hidden={!canGoNext}>
           <PaginationNext
-            className="cursor-pointer"
+            className='cursor-pointer'
             onClick={goBackPage}
-            content="próxima"
+            content='próxima'
           />
         </PaginationItem>
       </PaginationContent>

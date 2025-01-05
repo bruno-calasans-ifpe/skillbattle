@@ -2,25 +2,25 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectScrollDownButton,
   SelectTrigger,
   SelectValue,
-  SelectScrollDownButton,
-} from "@/components/ui/select";
-import useCreateChallengeStore from "@/store/createChallengeStore";
-import type { ChallengeType } from "@/types/Challenge";
+} from '@/components/ui/select';
+import useCreateChallengeStore from '@/store/createChallengeStore';
+import type { ChallengeType } from '@/types/Challenge';
 
 const challengeTypeData = [
   {
-    label: "Normal",
-    value: "normal",
+    label: 'Normal',
+    value: 'normal',
   },
   {
-    label: "Pontuação",
-    value: "score",
+    label: 'Pontuação',
+    value: 'score',
   },
   {
-    label: "Speed",
-    value: "speed",
+    label: 'Speed',
+    value: 'speed',
   },
 ];
 
@@ -33,11 +33,11 @@ export default function ChallengeTypeSelector() {
   };
 
   return (
-    <div className="flex gap-1 items-center">
-      <p className="text-sm">Tipo:</p>
-      <Select defaultValue="normal" onValueChange={changeTypeHandler}>
-        <SelectTrigger className="w-fit h-6 p-2">
-          <SelectValue placeholder="Tipo de Desafio" />
+    <div className='flex gap-1 items-center'>
+      <p className='text-sm'>Tipo:</p>
+      <Select defaultValue='normal' onValueChange={changeTypeHandler}>
+        <SelectTrigger className='w-fit h-6 p-2'>
+          <SelectValue placeholder='Tipo de Desafio' />
         </SelectTrigger>
         <SelectContent>
           {challengeTypeData.map(({ label, value }) => (
@@ -45,7 +45,7 @@ export default function ChallengeTypeSelector() {
               {label}
             </SelectItem>
           ))}
-          <SelectScrollDownButton className="" />
+          <SelectScrollDownButton className='' />
         </SelectContent>
       </Select>
     </div>

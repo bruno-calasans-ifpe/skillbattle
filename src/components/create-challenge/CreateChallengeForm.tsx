@@ -1,6 +1,8 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -9,19 +11,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import CreateChallengeImageUpload from "./CreateChallengeImageUpload";
-import useCreateChallengeStore from "@/store/createChallengeStore";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import useCreateChallengeStore from '@/store/createChallengeStore';
+
+import CreateChallengeImageUpload from './CreateChallengeImageUpload';
 
 const createChallengeSchema = z
   .object({
     url: z
-      .string({ required_error: "Url do desafio é obrigatório" })
-      .url("Url inválida"),
-    name: z.string({ required_error: "Nome do desafio é obrigatório" }),
+      .string({ required_error: 'Url do desafio é obrigatório' })
+      .url('Url inválida'),
+    title: z.string({ required_error: 'Nome do desafio é obrigatório' }),
     challenge: z.string(),
     category: z.string(),
     desc: z.string(),
@@ -36,8 +38,8 @@ export default function CreateChallengeForm() {
   const form = useForm<CreateChallengeInputs>({
     resolver: zodResolver(createChallengeSchema),
     defaultValues: {
-      url: "",
-      name: "",
+      url: '',
+      title: '',
     },
   });
 
@@ -53,18 +55,18 @@ export default function CreateChallengeForm() {
   return (
     <Form {...form}>
       <form
-        id="create-challenge"
-        className="space-y-8"
+        id='create-challenge'
+        className='space-y-8'
         onSubmit={form.handleSubmit(onSubmit)}
         onChange={changeFormHandler}
       >
         {/* Imagem */}
         <FormField
           control={form.control}
-          name="url"
+          name='url'
           render={() => (
             <FormItem>
-              <FormLabel className="font-bold">Imagem</FormLabel>
+              <FormLabel className='font-bold'>Imagem</FormLabel>
               <FormControl>
                 <CreateChallengeImageUpload />
               </FormControl>
@@ -78,16 +80,16 @@ export default function CreateChallengeForm() {
         {/* Nome */}
         <FormField
           control={form.control}
-          name="name"
+          name='title'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-bold">Nome</FormLabel>
+              <FormLabel className='font-bold'>Título</FormLabel>
               <FormControl>
                 <Input
                   {...field}
-                  id="challenge-name"
-                  type="text"
-                  placeholder="Nome de exibição do desafio"
+                  id='challenge-title'
+                  type='text'
+                  placeholder='Título do desafio'
                 />
               </FormControl>
               <FormMessage />
@@ -98,16 +100,16 @@ export default function CreateChallengeForm() {
         {/*  Desafio*/}
         <FormField
           control={form.control}
-          name="challenge"
+          name='challenge'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-bold">Desafio</FormLabel>
+              <FormLabel className='font-bold'>Desafio</FormLabel>
               <FormControl>
                 <Input
                   {...field}
-                  id="challenge"
-                  type="text"
-                  placeholder="O desafio para os jogadores"
+                  id='challenge'
+                  type='text'
+                  placeholder='O desafio para os jogadores'
                 />
               </FormControl>
               <FormMessage />
@@ -118,16 +120,16 @@ export default function CreateChallengeForm() {
         {/*  Decrição*/}
         <FormField
           control={form.control}
-          name="desc"
+          name='desc'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-bold">Descrição</FormLabel>
+              <FormLabel className='font-bold'>Descrição</FormLabel>
               <FormControl>
                 <Textarea
                   {...field}
-                  id="challenge-desc"
-                  className="h-32 resize-none"
-                  placeholder="Descrição do desafio"
+                  id='challenge-desc'
+                  className='h-32 resize-none'
+                  placeholder='Descrição do desafio'
                 />
               </FormControl>
               <FormMessage />
@@ -135,18 +137,18 @@ export default function CreateChallengeForm() {
           )}
         />
 
-        <div className="flex flex-1 gap-3">
+        <div className='flex flex-1 gap-3'>
           <Button
-            id="reset-challenge"
-            type="reset"
-            className="flex-1 bg-indigo-500 font-bold hover:bg-indigo-600"
+            id='reset-challenge'
+            type='reset'
+            className='flex-1 bg-indigo-500 font-bold hover:bg-indigo-600'
           >
             Limpar
           </Button>
           <Button
-            id="submit-challenge"
-            type="submit"
-            className="flex-1 bg-emerald-500 font-bold hover:bg-emerald-600"
+            id='submit-challenge'
+            type='submit'
+            className='flex-1 bg-emerald-500 font-bold hover:bg-emerald-600'
           >
             Criar desafio
           </Button>
