@@ -73,7 +73,7 @@ export default function SearchChallenge({}: SearchChallengeProps) {
           type='search'
           placeholder='Pesquise por um desafio'
           value={searchedChallenge}
-          onChange={(e) => setSearchedChallenge(e.target.value)}
+          onChange={(event) => setSearchedChallenge(event.target.value)}
           className='focus-visible:ring-emerald-500 focus-visible:ring-1 p-4'
           required
         />

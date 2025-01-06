@@ -13,11 +13,7 @@ export default function Home() {
       <SearchChallenge />
       <div className='flex flex-col gap-3 mb-5'>
         <Title>Desafios</Title>
-        <FeatureChallenges
-          showMoreUrl='/'
-          title='Desafios em destaque'
-          challenges={CHALLENGE_DATA}
-        />
+        <FeatureChallenges challenges={CHALLENGE_DATA} />
       </div>
 
       <div className='flex flex-col gap-3 mb-5'>

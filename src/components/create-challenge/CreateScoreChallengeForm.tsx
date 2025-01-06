@@ -160,7 +160,7 @@ export default function CreateScoreChallengeForm() {
               <FormDescription>
                 Adicione quantos desafios você quiser. Dica: você pode arrastar
                 o desafio para alterar a ordem que serão feitos, caso escolha
-                seleção em 'ordem' (em regras).
+                seleção em &apos;ordem&apos; (em regras).
               </FormDescription>
             </FormItem>
           )}

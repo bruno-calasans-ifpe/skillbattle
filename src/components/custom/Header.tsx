@@ -9,9 +9,8 @@ import AppSidebar from '@/components/custom/AppSideBard';
 import { Button } from '@/components/ui/button';
 import { SidebarProvider } from '@/components/ui/sidebar';
 
-import { Input } from '../ui/input';
-import CodeBtn from './CodeBtn';
-import CreateChallengeBtn from './CreateChallengeBtn';
+import CodeButton from './CodeButton';
+import CreateChallengeButton from './CreateChallengeButton';
 import UserAvatar from './UserAvatar';
 
 type HeaderProps = {
@@ -54,7 +53,7 @@ export default function Header({ session }: HeaderProps) {
         </div> */}
         {!session && (
           <div className='flex gap-2'>
-            <CodeBtn />
+            <CodeButton />
 
             <div className='flex gap-1'>
               <Button
@@ -84,7 +83,7 @@ export default function Header({ session }: HeaderProps) {
         )}
         {session && session.user && (
           <div className='flex items-center'>
-            <CreateChallengeBtn />
+            <CreateChallengeButton />
             <UserAvatar user={session.user} />
           </div>
         )}

@@ -5,6 +5,8 @@ export type Challenge = {
   image: string;
   rules: ChallengeRules;
   challenges: string[];
+  desc: string;
+  createdBy: string;
 };
 
 export type ChallengeType = 'normal' | 'speed' | 'score';

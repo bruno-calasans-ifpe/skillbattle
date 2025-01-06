@@ -37,6 +37,8 @@ export const createChallengeStoreInitialState: CreateChallengeState &
   image: '',
   type: 'normal',
   rules: DEFAULT_NORMAL_RULES,
+  desc: '',
+  createdBy: 'user3131',
 };
 
 const useCreateChallengeStore = create<CreateChallengeStore>()((set, get) => ({

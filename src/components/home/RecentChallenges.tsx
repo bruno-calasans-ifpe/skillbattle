@@ -14,7 +14,7 @@ export default function RecentChallenges({
     <div className='flex flex-col w-full gap-4'>
       <div className='grid lg:grid-cols-5 md:grid-cols-3 gap-2'>
         {challenges.map((challenge, index) => (
-          <ChallengeCard key={challenge.name + index} challenge={challenge} />
+          <ChallengeCard key={challenge.title + index} challenge={challenge} />
         ))}
       </div>
     </div>

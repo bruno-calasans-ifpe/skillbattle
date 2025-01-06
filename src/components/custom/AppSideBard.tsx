@@ -11,6 +11,7 @@ import {
   Users,
   X,
 } from 'lucide-react';
+import Link from 'next/link';
 
 import {
   Sidebar,
@@ -59,18 +60,18 @@ export default function AppSidebar({ onCloseMenu }: AppSidebarProps) {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href='/'>
+                <Link href='/'>
                   <Home />
                   <span>Home</span>
-                </a>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href='/explore'>
+                <Link href='/explore'>
                   <Telescope />
                   <span>Explore</span>
-                </a>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>

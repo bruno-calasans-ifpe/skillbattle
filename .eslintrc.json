@@ -10,6 +10,8 @@
   "rules": {
     "unicorn/no-null": "off",
     "unicorn/filename-case": "off",
+    "unicorn/consistent-function-scoping": "off",
+    "import/named": "off",
     "simple-import-sort/exports": "error",
     "simple-import-sort/imports": "error",
     "unicorn/no-array-callback-reference": "off",

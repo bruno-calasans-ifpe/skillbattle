@@ -12,13 +12,20 @@ import type { Challenge } from '@/types/Challenge';
 const randInt = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1) + min);
 
-const MATCH_STATUS = [
-  <p className='text-emerald-500 text-sm font-bold'>Venceu</p>,
-  <p className='text-red-500 text-sm font-bold'>
-    Perdeu (classificação: {randInt(2, 10)})
-  </p>,
-  <p className='text-indigo-500 text-sm font-bold'>Andamento</p>,
-];
+const getRadomMatchResult = () => {
+  const MATCH_STATUS = [
+    <p key={1} className='text-emerald-500 text-sm font-bold'>
+      Venceu
+    </p>,
+    <p key={2} className='text-red-500 text-sm font-bold'>
+      Perdeu (classificação: {randInt(2, 10)})
+    </p>,
+    <p key={3} className='text-indigo-500 text-sm font-bold'>
+      Andamento
+    </p>,
+  ];
+  return MATCH_STATUS[randInt(0, 2)];
+};
 
 type MatchCardProps = {
   challenge: Challenge;
@@ -48,7 +55,7 @@ export default function MatchCard({ challenge }: MatchCardProps) {
         {/* match status */}
         <div className='flex gap-1 text-sm items-center font-normal '>
           {/*Hydration Error */}
-          <div>{MATCH_STATUS[randInt(0, 2)]}</div>
+          <div>{getRadomMatchResult()}</div>
         </div>
       </CardTitle>
 
@@ -63,9 +70,9 @@ export default function MatchCard({ challenge }: MatchCardProps) {
           <Badge className='bg-indigo-500 hover:bg-indigo-600 cursor-pointer'>
             {challenge.type}
           </Badge>
-          {challenge.categories.map((category) => (
+          {challenge.categories.map((category, index) => (
             <Badge
-              key={category}
+              key={category + index}
               className='bg-purple-500 cursor-pointer hover:bg-purple-600'
             >
               {category}

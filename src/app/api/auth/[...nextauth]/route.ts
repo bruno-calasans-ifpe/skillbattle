@@ -4,7 +4,7 @@ import NextAuth from 'next-auth';
 import EmailProvider from 'next-auth/providers/email';
 import GoogleProvider from 'next-auth/providers/google';
 
-import { GOOGLE_CLIENT_ID, GOOGLE_SECRET_ID } from '@/config/env';
+import { GOOGLE_CLIENT_ID, GOOGLE_SECRET_ID } from '@/config/enviroment';
 import firebaseApp from '@/services/firebase/app';
 
 const handler = NextAuth({
