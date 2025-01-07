@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 import ChallengeInfoCommentaries from '@/components/challenge-info/ChallengeInfoCommentaries';
 import ChallengeInfoDescription from '@/components/challenge-info/ChallengeInfoDescription';
 import ChallengeInfoOtherActions from '@/components/challenge-info/ChallengeInfoOtherActions';
@@ -35,7 +33,7 @@ export default async function ChallengeIdPage({
         {/* Image */}
         <div id='challenge-img border-2'>
           <img
-            src={foundChallenge?.image}
+            src={foundChallenge.image}
             alt={foundChallenge.title}
             className='h-full w-full border-2 shadow-sm rounded-md object-contain'
           />
@@ -58,7 +56,7 @@ export default async function ChallengeIdPage({
           <ChallengeInfoUser challenge={foundChallenge} />
 
           {/* Join Button */}
-          <JoinButton />
+          <JoinButton challenge={foundChallenge} />
 
           {/* Other Info */}
           <ChallengeInfoOtherActions />

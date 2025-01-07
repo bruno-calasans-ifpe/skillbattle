@@ -7,16 +7,14 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 
-type ChallengeMoreInfoButtonProps = {};
-
-export default function ChallengeMoreInfoButton({}: ChallengeMoreInfoButtonProps) {
+export default function ChallengeMoreInfoButton() {
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
           <Info
             className='text-indigo-600 cursor-pointer hover:text-indigo-800'
-            size={24}
+            size={20}
           />
         </TooltipTrigger>
         <TooltipContent>

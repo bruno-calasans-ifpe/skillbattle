@@ -16,6 +16,7 @@ export const CHALLENGE_DATA: Challenge[] = [
     rules: DEFAULT_SPEED_RULES,
     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum libero aliquam deserunt vel eaque dolorem perspiciatis laudantium ipsam dolor fugit non eligendi totam ea illum recusandae, nam iusto sit consequatur?',
     createdBy: 'user1231412',
+    status: 'waiting',
   },
   {
     title: 'Desafio2',
@@ -26,6 +27,7 @@ export const CHALLENGE_DATA: Challenge[] = [
     rules: DEFAULT_SPEED_RULES,
     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum libero aliquam deserunt vel eaque dolorem perspiciatis laudantium ipsam dolor fugit non eligendi totam ea illum recusandae, nam iusto sit consequatur?',
     createdBy: 'user1231412',
+    status: 'waiting',
   },
   {
     title: 'Desafio3',
@@ -36,6 +38,7 @@ export const CHALLENGE_DATA: Challenge[] = [
     rules: DEFAULT_NORMAL_RULES,
     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum libero aliquam deserunt vel eaque dolorem perspiciatis laudantium ipsam dolor fugit non eligendi totam ea illum recusandae, nam iusto sit consequatur?',
     createdBy: 'user1231412',
+    status: 'waiting',
   },
   {
     title: 'Desafio4',
@@ -46,6 +49,7 @@ export const CHALLENGE_DATA: Challenge[] = [
     rules: DEFAULT_NORMAL_RULES,
     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum libero aliquam deserunt vel eaque dolorem perspiciatis laudantium ipsam dolor fugit non eligendi totam ea illum recusandae, nam iusto sit consequatur?',
     createdBy: 'user1231412',
+    status: 'waiting',
   },
   {
     title: 'Desafio5',
@@ -56,6 +60,7 @@ export const CHALLENGE_DATA: Challenge[] = [
     rules: DEFAULT_SCORE_RULES,
     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum libero aliquam deserunt vel eaque dolorem perspiciatis laudantium ipsam dolor fugit non eligendi totam ea illum recusandae, nam iusto sit consequatur?',
     createdBy: 'user1231412',
+    status: 'waiting',
   },
   {
     title: 'Desafio6',
@@ -66,6 +71,7 @@ export const CHALLENGE_DATA: Challenge[] = [
     rules: DEFAULT_SCORE_RULES,
     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum libero aliquam deserunt vel eaque dolorem perspiciatis laudantium ipsam dolor fugit non eligendi totam ea illum recusandae, nam iusto sit consequatur?',
     createdBy: 'user1231412',
+    status: 'waiting',
   },
   {
     title: 'Desafio7',
@@ -76,5 +82,6 @@ export const CHALLENGE_DATA: Challenge[] = [
     rules: DEFAULT_SCORE_RULES,
     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum libero aliquam deserunt vel eaque dolorem perspiciatis laudantium ipsam dolor fugit non eligendi totam ea illum recusandae, nam iusto sit consequatur?',
     createdBy: 'user1231412',
+    status: 'waiting',
   },
 ];

@@ -39,6 +39,7 @@ export const createChallengeStoreInitialState: CreateChallengeState &
   rules: DEFAULT_NORMAL_RULES,
   desc: '',
   createdBy: 'user3131',
+  status: 'waiting',
 };
 
 const useCreateChallengeStore = create<CreateChallengeStore>()((set, get) => ({

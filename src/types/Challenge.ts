@@ -7,10 +7,17 @@ export type Challenge = {
   challenges: string[];
   desc: string;
   createdBy: string;
+  status: ChallengeStatus;
 };
 
 export type ChallengeType = 'normal' | 'speed' | 'score';
-export type ChallengeStatus = 'win' | 'lose' | 'waiting';
+export type ChallengeStatus =
+  | 'waiting'
+  | 'starting'
+  | 'playing'
+  | 'voting'
+  | 'editing'
+  | 'finished';
 export type ScoreSelectionType = 'order' | 'random';
 
 export type NormalChallengeRules = {
