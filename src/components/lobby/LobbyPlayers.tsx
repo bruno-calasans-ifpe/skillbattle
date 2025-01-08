@@ -17,8 +17,12 @@ export default function LobbyPlayers({ challenge }: LobbyPlayersProps) {
 
       {/* Players */}
       <div className='grid grid-cols-2 gap-2 scrollbar-thumb-purple-300 scrollbar-track-purple-700 h-52 overflow-y-scroll scrollbar-thin scrollbar-h-1 pr-2'>
-        {[...PLAYERS_DATA, ...PLAYERS_DATA].map((player, index) => (
-          <PlayerInfoCard key={player.id + index} player={player} />
+        {PLAYERS_DATA.map((player, index) => (
+          <PlayerInfoCard
+            key={player.id + index}
+            player={player}
+            host={challenge.createdBy === player.username}
+          />
         ))}
       </div>
     </div>
