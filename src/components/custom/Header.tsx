@@ -44,18 +44,13 @@ export default function Header({ session }: HeaderProps) {
             <div>Logo</div>
           </Link>
         </div>
-        {/* <div className="flex-1">
-          <Input
-            type="search"
-            className="bg-white text-black"
-            placeholder="Pesquise por desafios"
-          />
-        </div> */}
         {!session && (
           <div className='flex gap-2'>
+            <CreateChallengeButton />
             <CodeButton />
 
             <div className='flex gap-1'>
+              {/* Login Button */}
               <Button
                 variant='ghost'
                 size='sm'
@@ -67,6 +62,7 @@ export default function Header({ session }: HeaderProps) {
                   <p className='text-purple-600 font-bold'>Login</p>
                 </Link>
               </Button>
+              {/* Register button */}
               <Button
                 variant='ghost'
                 size='sm'

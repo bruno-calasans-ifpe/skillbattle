@@ -31,6 +31,7 @@ type CreateChallengeStore = CreateChallengeState & CreateChallengeActions;
 
 export const createChallengeStoreInitialState: CreateChallengeState &
   Challenge = {
+  id: '',
   title: '',
   categories: [],
   challenges: [],

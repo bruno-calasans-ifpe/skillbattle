@@ -1,4 +1,5 @@
 import type { Challenge } from '@/types/Challenge';
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   DEFAULT_NORMAL_RULES,
@@ -8,6 +9,7 @@ import {
 
 export const CHALLENGE_DATA: Challenge[] = [
   {
+    id: '1',
     title: 'Desafio1',
     categories: ['Arte'],
     type: 'speed',
@@ -19,6 +21,7 @@ export const CHALLENGE_DATA: Challenge[] = [
     status: 'waiting',
   },
   {
+    id: '2',
     title: 'Desafio2',
     categories: ['Música'],
     type: 'speed',
@@ -30,6 +33,7 @@ export const CHALLENGE_DATA: Challenge[] = [
     status: 'waiting',
   },
   {
+    id: '3',
     title: 'Desafio3',
     categories: ['Comunicação'],
     type: 'normal',
@@ -41,6 +45,7 @@ export const CHALLENGE_DATA: Challenge[] = [
     status: 'waiting',
   },
   {
+    id: '4',
     title: 'Desafio4',
     categories: ['Dança'],
     type: 'normal',
@@ -52,6 +57,7 @@ export const CHALLENGE_DATA: Challenge[] = [
     status: 'waiting',
   },
   {
+    id: '5',
     title: 'Desafio5',
     categories: ['Video'],
     type: 'score',
@@ -63,6 +69,7 @@ export const CHALLENGE_DATA: Challenge[] = [
     status: 'waiting',
   },
   {
+    id: '6',
     title: 'Desafio6',
     categories: ['Design'],
     type: 'score',
@@ -74,6 +81,7 @@ export const CHALLENGE_DATA: Challenge[] = [
     status: 'waiting',
   },
   {
+    id: '7',
     title: 'Desafio7',
     categories: ['Video'],
     type: 'score',

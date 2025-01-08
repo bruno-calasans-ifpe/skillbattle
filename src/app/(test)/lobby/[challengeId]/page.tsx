@@ -39,7 +39,7 @@ export default async function ChallengeLobby({ params }: ChallengeLobbyProps) {
               />
 
               {/* Lobby Actions */}
-              <LobbyActions />
+              <LobbyActions challenge={foundChallenge} />
             </div>
 
             {/* Some info */}

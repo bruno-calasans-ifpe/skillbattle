@@ -19,8 +19,15 @@ import { Input } from '../ui/input';
 
 const createSpeedChallengeRulesSchema = z
   .object({
-    classifications: z.number().min(1).nonnegative(),
-    maxPlayerNum: z.number().min(2).nonnegative(),
+    classifications: z
+      .number()
+      .min(DEFAULT_SPEED_RULES.classifications)
+      .nonnegative(),
+    maxPlayerNum: z
+      .number()
+      .min(DEFAULT_SPEED_RULES.maxPlayerNum)
+      .nonnegative(),
+    maxTime: z.number().min(DEFAULT_SPEED_RULES.maxTime).nonnegative(),
   })
   .required();
 
@@ -99,45 +106,32 @@ export default function CreateSpeedChallengeRules() {
             </FormItem>
           )}
         />
-        {/* Data Inicial */}
-        {/* <FormField
-          control={form.control}
-          name="startDate"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Data de Início</FormLabel>
-              <FormControl>
-                <Input
-                  id="speed-challenge-start-date"
-                  type="date"
-                  min={Date.now()}
-                />
-              </FormControl>
-              <FormMessage />
-              <FormDescription>Quando o desafio vai começar</FormDescription>
-            </FormItem>
-          )}
-        /> */}
 
-        {/* Data Final */}
-        {/* <FormField
+        {/* Tempo máximo do desafio */}
+        <FormField
           control={form.control}
-          name="startDate"
+          name='maxTime'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Data de Fim</FormLabel>
+              <FormLabel className='font-bold'>
+                Tempo máximo do desafio
+              </FormLabel>
               <FormControl>
                 <Input
-                  id="speed-challenge-end-date"
-                  type="date"
-                  min={Date.now()}
+                  {...field}
+                  id='speed-challenge-max-challenge-time'
+                  type='number'
+                  min={2}
                 />
               </FormControl>
               <FormMessage />
-              <FormDescription>Quando o desafio vai terminar</FormDescription>
+              <FormDescription>
+                Quanto tempo os jogadores terão para fazer o desafio (mínimo{' '}
+                {DEFAULT_SPEED_RULES.maxTime})
+              </FormDescription>
             </FormItem>
           )}
-        /> */}
+        />
       </form>
     </Form>
   );

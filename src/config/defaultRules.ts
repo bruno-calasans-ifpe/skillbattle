@@ -6,11 +6,13 @@ import {
 
 export const DEFAULT_NORMAL_RULES: NormalChallengeRules = {
   maxPlayerNum: 2,
+  maxTime: 5,
 };
 
 export const DEFAULT_SPEED_RULES: SpeedChallengeRules = {
   maxPlayerNum: 2,
   classifications: 2,
+  maxTime: 1,
 };
 
 export const DEFAULT_SCORE_RULES: ScoreChallengeRules = {

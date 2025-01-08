@@ -1,10 +1,14 @@
-import { DoorOpen, SendHorizonal, Pencil, Play } from 'lucide-react';
+import { DoorOpen, Pencil, Play, SendHorizonal } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { Challenge } from '@/types/Challenge';
 
-type LobbyActionsProps = {};
+type LobbyActionsProps = {
+  challenge: Challenge;
+};
 
-export default function LobbyActions({}: LobbyActionsProps) {
+export default function LobbyActions({ challenge }: LobbyActionsProps) {
   return (
     <div className='flex flex-col gap-1'>
       <Button
@@ -28,17 +32,19 @@ export default function LobbyActions({}: LobbyActionsProps) {
         size='sm'
         className='bg-amber-500 hover:bg-amber-600 font-bold flex justify-start'
       >
-        <Pencil className='rotate-180' />
+        <Pencil />
         Editar
       </Button>
-      <Button
-        id='lobby-edit-button'
-        size='sm'
-        className='bg-emerald-500 hover:bg-emerald-600 font-bold flex justify-start'
-      >
-        <Play className='rotate-180' />
-        Iniciar
-      </Button>
+      <Link href={`/play-challenge/${challenge.id}`}>
+        <Button
+          id='lobby-start-button'
+          size='sm'
+          className='bg-emerald-500 hover:bg-emerald-600 font-bold flex justify-start w-full'
+        >
+          <Play />
+          Iniciar
+        </Button>
+      </Link>
     </div>
   );
 }
