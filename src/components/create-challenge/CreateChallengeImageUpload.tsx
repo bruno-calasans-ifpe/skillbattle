@@ -11,7 +11,7 @@ type CreateChallengeImageUploadProps = {};
 export default function CreateChallengeImageUpload({}: CreateChallengeImageUploadProps) {
   return (
     <div>
-      <UploadDropzone endpoint={'/'}></UploadDropzone>
+      <UploadDropzone disabled endpoint={'/'}></UploadDropzone>
     </div>
   );
 }

@@ -16,7 +16,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import useCreateChallengeStore from '@/store/createChallengeStore';
 
-import CreateChallengeImageUpload from './CreateChallengeImageUpload';
+import FileUploadDropZone from '../custom/FileUploadDropZone';
 
 const createChallengeSchema = z
   .object({
@@ -68,7 +68,7 @@ export default function CreateChallengeForm() {
             <FormItem>
               <FormLabel className='font-bold'>Imagem</FormLabel>
               <FormControl>
-                <CreateChallengeImageUpload />
+                <FileUploadDropZone />
               </FormControl>
               <FormDescription>
                 Uma imagem para representar o desafio.

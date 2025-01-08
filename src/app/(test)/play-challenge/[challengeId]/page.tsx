@@ -1,5 +1,10 @@
+import ChallengeMoreInfoButton from '@/components/challenge-info/ChallengeMoreInfoButton';
 import ContentContainer from '@/components/custom/ContentContainer';
 import Title from '@/components/custom/Title';
+import PlayChallengeForm from '@/components/play-challenge/PlayChallengeForm';
+import PlayChallengeInfo from '@/components/play-challenge/PlayChallengeInfo';
+import PlayScoreChallengeInfo from '@/components/play-challenge/PlayScoreChallengeInfo';
+import PlaySpeedChallengeInfo from '@/components/play-challenge/PlaySpeedChallengeInfo';
 import { CHALLENGE_DATA } from '@/config/challenges';
 
 type PlayChallengePageProps = {
@@ -18,10 +23,27 @@ export default async function PlayChallengePage({
   return (
     <ContentContainer>
       {/* Título */}
-      <Title>{foundChallenge.title}</Title>
+      <Title className='flex justify-start items-center'>
+        <p>{foundChallenge.title}</p>
+        <ChallengeMoreInfoButton />
+      </Title>
 
       {/* Challenge Info */}
-      <div></div>
+      <div className='flex gap-3'>
+        {foundChallenge.type === 'normal' && (
+          <PlayChallengeInfo challenge={foundChallenge} />
+        )}
+
+        {foundChallenge.type === 'speed' && (
+          <PlaySpeedChallengeInfo challenge={foundChallenge} />
+        )}
+
+        {foundChallenge.type === 'score' && (
+          <PlayScoreChallengeInfo challenge={foundChallenge} />
+        )}
+
+        <PlayChallengeForm />
+      </div>
     </ContentContainer>
   );
 }

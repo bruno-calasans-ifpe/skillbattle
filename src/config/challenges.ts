@@ -1,5 +1,6 @@
-import type { Challenge } from '@/types/Challenge';
 import { v4 as uuidv4 } from 'uuid';
+
+import type { Challenge } from '@/types/Challenge';
 
 import {
   DEFAULT_NORMAL_RULES,

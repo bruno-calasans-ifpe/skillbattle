@@ -1,7 +1,7 @@
 import { DoorOpen, Pencil, Play, SendHorizonal } from 'lucide-react';
+import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import { Challenge } from '@/types/Challenge';
 
 type LobbyActionsProps = {
