@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Badge } from '@/components/ui/badge';
 import type { Challenge } from '@/types/Challenge';
 
 import { Card, CardContent, CardFooter, CardTitle } from '../ui/card';

@@ -8,6 +8,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { Challenge } from '@/types/Challenge';
+import GiveUpButton from '../custom/GiveUpButton';
 
 type WaitingRoomInfoProps = {
   challenge: Challenge;
@@ -16,13 +17,7 @@ type WaitingRoomInfoProps = {
 export default function WaitingRoomInfo({ challenge }: WaitingRoomInfoProps) {
   return (
     <div className='flex items-center justify-between'>
-      <Button
-        size='sm'
-        className='bg-red-500 hover:bg-red-600 font-bold self-start'
-      >
-        <ChevronLeft />
-        Desistir
-      </Button>
+      <GiveUpButton />
       <div className='flex flex-col justify-end items-end'>
         <p className='text-sm font-semibold text-stone-800'>
           Tempo restante: <span className='text-emerald-500'>50 minutos</span>

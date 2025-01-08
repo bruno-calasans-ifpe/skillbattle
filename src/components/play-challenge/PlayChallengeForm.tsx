@@ -1,8 +1,6 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SendHorizonal, X } from 'lucide-react';
-import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -20,6 +18,8 @@ import { Challenge } from '@/types/Challenge';
 
 import FileUploadDropZone from '../custom/FileUploadDropZone';
 import { Button } from '../ui/button';
+import GiveUpButton from '../custom/GiveUpButton';
+import SendButton from '../custom/SendButton';
 
 const formSchema = z.object({
   title: z.string(),
@@ -40,9 +40,8 @@ export default function PlayChallengeForm({
       url: '',
     },
   });
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values);
   }
 
@@ -84,23 +83,9 @@ export default function PlayChallengeForm({
             )}
           />
 
-          <div className='flex justify-end gap-2'>
-            <Button
-              type='button'
-              className='bg-red-500 hover:bg-red-600 font-bold'
-            >
-              Desistir
-              <X />
-            </Button>
-            <Link href={`/waiting-room/${challenge.id}`}>
-              <Button
-                type='submit'
-                className='bg-emerald-500 hover:bg-emerald-600 font-bold'
-              >
-                Enviar
-                <SendHorizonal />
-              </Button>
-            </Link>
+          <div className='flex justify-end items-center gap-2'>
+            <GiveUpButton />
+            <SendButton challenge={challenge} />
           </div>
         </form>
       </Form>
