@@ -2,6 +2,7 @@ import {
   generateUploadButton,
   generateUploadDropzone,
 } from '@uploadthing/react';
+
 import { Button } from '../ui/button';
 
 export const UploadButton = generateUploadButton();

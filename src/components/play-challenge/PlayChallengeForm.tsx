@@ -1,8 +1,11 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { SendHorizonal, X } from 'lucide-react';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+
 import {
   Form,
   FormControl,
@@ -13,18 +16,23 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Button } from '../ui/button';
+import { Challenge } from '@/types/Challenge';
+
 import FileUploadDropZone from '../custom/FileUploadDropZone';
-import { X, SendHorizonal } from 'lucide-react';
+import { Button } from '../ui/button';
 
 const formSchema = z.object({
   title: z.string(),
   url: z.string().url(),
 });
 
-type PlayChallengeFormProps = {};
+type PlayChallengeFormProps = {
+  challenge: Challenge;
+};
 
-export default function PlayChallengeForm({}: PlayChallengeFormProps) {
+export default function PlayChallengeForm({
+  challenge,
+}: PlayChallengeFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -84,13 +92,15 @@ export default function PlayChallengeForm({}: PlayChallengeFormProps) {
               Desistir
               <X />
             </Button>
-            <Button
-              type='submit'
-              className='bg-emerald-500 hover:bg-emerald-600 font-bold'
-            >
-              Enviar
-              <SendHorizonal />
-            </Button>
+            <Link href={`/waiting-room/${challenge.id}`}>
+              <Button
+                type='submit'
+                className='bg-emerald-500 hover:bg-emerald-600 font-bold'
+              >
+                Enviar
+                <SendHorizonal />
+              </Button>
+            </Link>
           </div>
         </form>
       </Form>

@@ -9,14 +9,15 @@ import { LOBBY_MESSAGES_DATA } from '@/config/lobbyMsgs';
 import { PlayerMessage } from '@/types/Message';
 import { Player } from '@/types/Player';
 
-import ChatPlayerMessage from './ChatPlayerMessage';
-import ChatSystemMessage from './ChatSystemMessage';
+import ChatPlayerMessage from '../lobby/ChatPlayerMessage';
+import ChatSystemMessage from '../lobby/ChatSystemMessage';
 
-type LobbyChatProps = {
+type ChatProps = {
+  title: string;
   player: Player;
 };
 
-export default function LobbyChat({ player }: LobbyChatProps) {
+export default function Chat({ title, player }: ChatProps) {
   const [messages, setMessages] = useState(LOBBY_MESSAGES_DATA);
   const [message, setMessage] = useState('');
   const chatBottomRef = useRef<HTMLDivElement>(null);
@@ -42,7 +43,7 @@ export default function LobbyChat({ player }: LobbyChatProps) {
 
   return (
     <div id='lobby-chat' className='flex flex-col gap-2'>
-      <Title>Chat do lobby</Title>
+      <Title>{title}</Title>
 
       <div className='flex flex-col gap-1'>
         {/* Messages */}

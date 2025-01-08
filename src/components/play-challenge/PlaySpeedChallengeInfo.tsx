@@ -1,7 +1,7 @@
-import InfoText from '@/components/custom/InfoText';
-import { Challenge } from '@/types/Challenge';
 import ChallengeCategoryBadge from '@/components/custom/ChallengeCategoryBadge';
 import ChallengeTypeBadge from '@/components/custom/ChallengeTypeBadge';
+import InfoText from '@/components/custom/InfoText';
+import { Challenge } from '@/types/Challenge';
 
 type PlaySpeedChallengeInfoProps = {
   challenge: Challenge;

@@ -1,6 +1,6 @@
+import LobbyChat from '@/components/custom/Chat';
 import ContentContainer from '@/components/custom/ContentContainer';
 import LobbyActions from '@/components/lobby/LobbyActions';
-import LobbyChat from '@/components/lobby/LobbyChat';
 import LobbyInfo from '@/components/lobby/LobbyInfo';
 import LobbyPlayers from '@/components/lobby/LobbyPlayers';
 import LobbyTitle from '@/components/lobby/LobbyTitle';
@@ -50,7 +50,7 @@ export default async function ChallengeLobby({ params }: ChallengeLobbyProps) {
           </div>
         </header>
         {/* chat */}
-        <LobbyChat player={PLAYERS_DATA[0]} />
+        <LobbyChat title='Chat do lobby' player={PLAYERS_DATA[0]} />
       </div>
     </ContentContainer>
   );

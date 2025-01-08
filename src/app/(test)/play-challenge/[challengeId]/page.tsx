@@ -42,7 +42,7 @@ export default async function PlayChallengePage({
           <PlayScoreChallengeInfo challenge={foundChallenge} />
         )}
 
-        <PlayChallengeForm />
+        <PlayChallengeForm challenge={foundChallenge} />
       </div>
     </ContentContainer>
   );
