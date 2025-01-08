@@ -1,15 +1,15 @@
+import { Crown } from 'lucide-react';
 import Link from 'next/link';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
-import { Player } from '@/types/Player';
-import { Crown } from 'lucide-react';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { Player } from '@/types/Player';
 
 type PlayerInfoCardProps = {
   player: Player;

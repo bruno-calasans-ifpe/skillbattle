@@ -1,4 +1,4 @@
-import { DoorOpen, SendHorizonal } from 'lucide-react';
+import { DoorOpen, SendHorizonal, Pencil, Play } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 
@@ -22,6 +22,22 @@ export default function LobbyActions({}: LobbyActionsProps) {
       >
         <SendHorizonal className='rotate-180' />
         Convidar
+      </Button>
+      <Button
+        id='lobby-edit-button'
+        size='sm'
+        className='bg-amber-500 hover:bg-amber-600 font-bold flex justify-start'
+      >
+        <Pencil className='rotate-180' />
+        Editar
+      </Button>
+      <Button
+        id='lobby-edit-button'
+        size='sm'
+        className='bg-emerald-500 hover:bg-emerald-600 font-bold flex justify-start'
+      >
+        <Play className='rotate-180' />
+        Iniciar
       </Button>
     </div>
   );
