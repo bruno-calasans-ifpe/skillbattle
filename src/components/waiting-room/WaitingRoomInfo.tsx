@@ -8,6 +8,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { Challenge } from '@/types/Challenge';
+
 import GiveUpButton from '../custom/GiveUpButton';
 
 type WaitingRoomInfoProps = {

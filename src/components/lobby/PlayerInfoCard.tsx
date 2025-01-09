@@ -2,7 +2,6 @@ import { Crown } from 'lucide-react';
 import Link from 'next/link';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import {
   Tooltip,
@@ -26,7 +25,7 @@ export default function PlayerInfoCard({ player, host }: PlayerInfoCardProps) {
             <AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <div className='flex'>
+          <div className='flex gap-1'>
             <p className='text-sm font-semibold'>{player.username}</p>{' '}
             {host && (
               <TooltipProvider>

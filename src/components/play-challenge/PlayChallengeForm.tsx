@@ -17,9 +17,9 @@ import { Input } from '@/components/ui/input';
 import { Challenge } from '@/types/Challenge';
 
 import FileUploadDropZone from '../custom/FileUploadDropZone';
-import { Button } from '../ui/button';
 import GiveUpButton from '../custom/GiveUpButton';
 import SendButton from '../custom/SendButton';
+import { Button } from '../ui/button';
 
 const formSchema = z.object({
   title: z.string(),

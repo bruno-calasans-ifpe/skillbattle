@@ -25,7 +25,7 @@ export default async function WaitingRoomPage({
         <WaitingRoomInfo challenge={foundChallenge} />
         <WaitingRoomPlayers challenge={foundChallenge} />
       </header>
-      <Chat title='Chat da Sala de Espera' player={PLAYERS_DATA[0]} />
+      <Chat title='Chat' player={PLAYERS_DATA[0]} />
     </ContentContainer>
   );
 }

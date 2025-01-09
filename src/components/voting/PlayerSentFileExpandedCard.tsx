@@ -1,4 +1,4 @@
-import { PlayerSentFile } from '@/types/PlayerSentFile';
+import Title from '@/components/custom/Title';
 import {
   Dialog,
   DialogContent,
@@ -6,7 +6,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import Title from '@/components/custom/Title';
+import { PlayerSentFile } from '@/types/PlayerSentFile';
 
 type PlayerSentFileExpandedCardProps = {
   open?: boolean;

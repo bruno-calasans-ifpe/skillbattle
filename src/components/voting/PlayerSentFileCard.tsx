@@ -1,7 +1,7 @@
 'use client';
 
-import { PlayerSentFile } from '@/types/PlayerSentFile';
-import { Button } from '../ui/button';
+import Link from 'next/link';
+
 import {
   Card,
   CardContent,
@@ -9,9 +9,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { PlayerSentFile } from '@/types/PlayerSentFile';
+
 import Title from '../custom/Title';
-import Link from 'next/link';
+import { Button } from '../ui/button';
 import PlayerSentFileExpandedCard from './PlayerSentFileExpandedCard';
+import { Challenge } from '@/types/Challenge';
 
 type PlayerSentFileCardProps = {
   file: PlayerSentFile;
@@ -41,12 +44,14 @@ export default function PlayerSentFileCard({ file }: PlayerSentFileCardProps) {
             <span className='font-semibold italic'>{file.createdBy}</span>
           </p>
         </Link>
-        <Button
-          size='sm'
-          className='w-full bg-emerald-500 hover:bg-emerald-600 font-bold text-lg'
-        >
-          Votar
-        </Button>
+        <Link href={`/waiting-room/1`} className='w-full'>
+          <Button
+            size='sm'
+            className='w-full bg-emerald-500 hover:bg-emerald-600 font-bold text-lg'
+          >
+            Votar
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );

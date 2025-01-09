@@ -1,6 +1,7 @@
-import Title from '@/components/custom/Title';
 import ChallengeMoreInfoButton from '@/components/challenge-info/ChallengeMoreInfoButton';
+import Title from '@/components/custom/Title';
 import { Challenge } from '@/types/Challenge';
+
 import GiveUpButton from '../custom/GiveUpButton';
 
 type VotingTitleProps = {

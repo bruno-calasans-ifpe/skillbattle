@@ -1,4 +1,5 @@
 import { PlayerSentFile } from '@/types/PlayerSentFile';
+
 import { PLAYERS_DATA } from './player';
 
 export const PLAYER_SENT_FILES_DATA: PlayerSentFile[] = [

@@ -1,4 +1,5 @@
 import { PLAYER_SENT_FILES_DATA } from '@/config/playerSentFiles';
+
 import PlayerSentFileCard from './PlayerSentFileCard';
 
 type VotingSentFilesProps = {};

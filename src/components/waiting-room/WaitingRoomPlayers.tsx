@@ -17,7 +17,7 @@ export default function WaitingRoomPlayers({
       {/* Ttile */}
       <div>
         <p className='flex text-lg items-center font-semibold'>
-          Jogadores Finalizados ({PLAYERS_DATA.length}/100)
+          Jogadores que terminaram ({PLAYERS_DATA.length}/100)
         </p>
       </div>
 

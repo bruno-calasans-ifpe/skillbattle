@@ -1,7 +1,8 @@
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { Challenge } from '@/types/Challenge';
 import { SendHorizonal, X } from 'lucide-react';
+import Link from 'next/link';
+
+import { Button } from '@/components/ui/button';
+import { Challenge } from '@/types/Challenge';
 
 type SendButtonProps = {
   challenge: Challenge;
