@@ -1,4 +1,3 @@
-import ChallengeInfoCommentaries from '@/components/challenge-info/ChallengeInfoCommentaries';
 import ChallengeInfoDescription from '@/components/challenge-info/ChallengeInfoDescription';
 import ChallengeInfoOtherActions from '@/components/challenge-info/ChallengeInfoOtherActions';
 import ChallengeInfoRules from '@/components/challenge-info/ChallengeInfoRules';
@@ -6,6 +5,7 @@ import ChallengeInfoTags from '@/components/challenge-info/ChallengeInfoTags';
 import ChallengeInfoUser from '@/components/challenge-info/ChallengeInfoUser';
 import ChallengeMoreInfoButton from '@/components/challenge-info/ChallengeMoreInfoButton';
 import JoinButton from '@/components/challenge-info/JoinButton';
+import Commentaries from '@/components/custom/Commentaries';
 import ContentContainer from '@/components/custom/ContentContainer';
 import Title from '@/components/custom/Title';
 import { CHALLENGE_DATA } from '@/config/challenges';
@@ -67,7 +67,7 @@ export default async function ChallengeIdPage({
       <ChallengeInfoDescription challenge={foundChallenge} />
 
       {/* Commentaries */}
-      <ChallengeInfoCommentaries />
+      <Commentaries />
     </ContentContainer>
   );
 }

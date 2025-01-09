@@ -1,57 +1,43 @@
-import { Player } from '@/types/Player';
-import { ChallengeResult } from '@/types/Result';
+import { Challenge } from '@/types/Challenge';
+import { ChallengeClassification } from '@/types/Result';
+
+import NormalChallengeResultMessage from './NormalChallengeResultMessage';
+import ScoreChallengeResultMessage from './ScoreChallengeResultMessage';
+import SpeedChallengeResultMessage from './SpeedChallengeResultMessage';
 
 type ResultMessageProps = {
-  currentPlayer: Player;
-  result: ChallengeResult;
+  challenge: Challenge;
+  playerClassification: ChallengeClassification;
 };
 
 export default function ResultMessage({
-  currentPlayer,
-  result,
+  challenge,
+  playerClassification,
 }: ResultMessageProps) {
-    
-  const won =
-    currentPlayer.id === result.player.id && result.classification === 1;
+  const won = playerClassification.position === 1;
 
   return (
-    <div>
-      {/* title and subtitle */}
-      <div className='flex flex-col gap-2 items-center justify-center'>
-        {won && (
-          <>
-            <p className='text-6xl text-emerald-600 uppercase font-bold'>
-              Você ganhou!
-            </p>
-            <p className='text-lg'>
-              Parabéns, você fez{' '}
-              <span className='font-semibold'>{result.totalScore} pontos</span>{' '}
-              e ficou em{' '}
-              <span className='font-semibold'>
-                {result.classification}° lugar
-              </span>
-              !
-            </p>
-          </>
-        )}
+    <div className='flex flex-col gap-2 items-center justify-center my-7'>
+      {challenge.type === 'speed' && (
+        <SpeedChallengeResultMessage
+          won={won}
+          classification={playerClassification}
+        />
+      )}
 
-        {!won && (
-          <>
-            <p className='text-6xl text-red-600 uppercase font-bold'>
-              Você perdeu!
-            </p>
-            <p className='text-lg'>
-              Infelizmente não foi dessa vez, você fez{' '}
-              <span className='font-semibold'>{result.totalScore} pontos</span>{' '}
-              e ficou em{' '}
-              <span className='font-semibold'>
-                {result.classification}° lugar
-              </span>
-              !
-            </p>
-          </>
-        )}
-      </div>
+      {challenge.type === 'normal' && (
+        <NormalChallengeResultMessage
+          won={won}
+          classification={playerClassification}
+        />
+      )}
+
+      {challenge.type === 'score' && (
+        <ScoreChallengeResultMessage
+          won={won}
+          classification={playerClassification}
+        />
+      )}
     </div>
   );
 }

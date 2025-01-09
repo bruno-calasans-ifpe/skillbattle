@@ -1,8 +1,9 @@
-import Title from '@/components/custom/Title';
-import ChallengeMoreInfoButton from '@/components/challenge-info/ChallengeMoreInfoButton';
-import { Challenge } from '@/types/Challenge';
-import { Button } from '@/components/ui/button';
 import { DoorOpen } from 'lucide-react';
+
+import ChallengeMoreInfoButton from '@/components/challenge-info/ChallengeMoreInfoButton';
+import Title from '@/components/custom/Title';
+import { Button } from '@/components/ui/button';
+import { Challenge } from '@/types/Challenge';
 
 type ResultTitleProps = {
   challenge: Challenge;

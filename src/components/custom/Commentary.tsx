@@ -12,17 +12,15 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import useCommentaryStore from '@/store/commentariesStore';
-import { Commentary } from '@/types/Commentary';
+import type { Commentary } from '@/types/Commentary';
 
 import { Button } from '../ui/button';
 
-type ChallengeInfoCommentaryProps = {
+type CommentaryProps = {
   commentary: Commentary;
 };
 
-export default function ChallengeInfoCommentary({
-  commentary,
-}: ChallengeInfoCommentaryProps) {
+export default function Commentary({ commentary }: CommentaryProps) {
   const [editing, setEditing] = useState(false);
   const [newContent, setNewContent] = useState('');
   const { deleteCommentary, updateCommentary } = useCommentaryStore();

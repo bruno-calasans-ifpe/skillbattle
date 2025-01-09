@@ -1,32 +1,32 @@
+import type { Challenge } from './Challenge';
 import type { Player } from './Player';
 
-export type ChallengeResult = {
+export type ChallengeResults = {
+  challenge: Challenge;
+  classifications: ChallengeClassification[];
+};
+
+export type ChallengeClassification = {
   player: Player;
-  totalScore: number;
-  classification: number;
+  position: number;
   statistics: ChallengeResultStatistics;
 };
 
-export type SpeedChallengeResult = {
-  player: Player;
-  elapsedTime: number;
-  classification: number;
-};
-
 export type NormalResultStatistics = {
+  totalScore: number;
   totalTime: number;
   elapsedTime: number;
 };
 
 export type SpeedResultStatistics = NormalResultStatistics & {};
 
-export type ScoreResultStatistic = {
-  challenge: string;
-} & NormalResultStatistics;
+export type ScoreResultStatistic = NormalResultStatistics & {
+  challengeName: string;
+  type: 'won' | 'lose';
+};
 
 export type ScoreResultStatistics = {
-  wonChallenges: ScoreResultStatistic[];
-  lostChallenges: ScoreResultStatistic[];
+  challenges: ScoreResultStatistic[];
 };
 
 export type ChallengeResultStatistics = Partial<NormalResultStatistics> &

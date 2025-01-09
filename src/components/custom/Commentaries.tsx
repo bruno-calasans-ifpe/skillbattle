@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import useCommentaryStore from '@/store/commentariesStore';
 
-import ChallengeInfoCommentary from './ChallengeInfoCommentary';
+import Commentary from './Commentary';
 
 export default function ChallengeInfoCommentaries() {
   const [commentaryContent, setCommentaryContent] = useState('');
@@ -67,10 +67,7 @@ export default function ChallengeInfoCommentaries() {
         {/* Commentaries */}
         {commentaries.length > 0 &&
           commentaries.map((commentary) => (
-            <ChallengeInfoCommentary
-              key={commentary.id}
-              commentary={commentary}
-            />
+            <Commentary key={commentary.id} commentary={commentary} />
           ))}
       </div>
     </div>

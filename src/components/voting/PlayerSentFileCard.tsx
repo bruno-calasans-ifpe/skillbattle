@@ -9,12 +9,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { Challenge } from '@/types/Challenge';
 import { PlayerSentFile } from '@/types/PlayerSentFile';
 
 import Title from '../custom/Title';
 import { Button } from '../ui/button';
 import PlayerSentFileExpandedCard from './PlayerSentFileExpandedCard';
-import { Challenge } from '@/types/Challenge';
 
 type PlayerSentFileCardProps = {
   file: PlayerSentFile;
