@@ -1,6 +1,7 @@
 import { DoorOpen } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+
+import { Button } from '@/components/ui/button';
 import { Challenge } from '@/types/Challenge';
 
 type ExitButtonProps = {

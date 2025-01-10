@@ -44,8 +44,7 @@ export default function ScoreChallengeResultMessage({
         Você ganhou!
       </p>
       <p className='text-lg'>
-        Parabéns, você completou os desafios com{' '}
-        {/* score */}
+        Parabéns, você completou os desafios com {/* score */}
         <span className='font-semibold'>
           {
             classification.statistics.challenges?.filter((c) => c.type == 'won')

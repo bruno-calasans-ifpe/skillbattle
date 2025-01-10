@@ -14,7 +14,6 @@ export default function ResultMessage({
   challenge,
   playerClassification,
 }: ResultMessageProps) {
-  
   const won = playerClassification.position === 1;
 
   return (
