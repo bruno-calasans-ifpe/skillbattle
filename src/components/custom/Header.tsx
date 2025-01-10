@@ -1,7 +1,6 @@
 'use client';
 
-import { LogIn, Menu, User } from 'lucide-react';
-import Link from 'next/link';
+import { Menu } from 'lucide-react';
 import { Session } from 'next-auth';
 import { useState } from 'react';
 
@@ -12,6 +11,9 @@ import { SidebarProvider } from '@/components/ui/sidebar';
 import CodeButton from './CodeButton';
 import CreateChallengeButton from './CreateChallengeButton';
 import UserAvatar from './UserAvatar';
+import RegisterButton from '@/components/header/RegisterButton';
+import LoginButton from '../header/LoginButton';
+import Logo from '../header/Logo';
 
 type HeaderProps = {
   session: Session | null;
@@ -40,9 +42,7 @@ export default function Header({ session }: HeaderProps) {
           >
             <Menu className='text-white ' />
           </Button>
-          <Link href='/'>
-            <div>Logo</div>
-          </Link>
+          <Logo />
         </div>
         {!session && (
           <div className='flex gap-2'>
@@ -50,30 +50,8 @@ export default function Header({ session }: HeaderProps) {
             <CodeButton />
 
             <div className='flex gap-1'>
-              {/* Login Button */}
-              <Button
-                variant='ghost'
-                size='sm'
-                asChild
-                className='bg-purple-200 hover:bg-purple-300 group'
-              >
-                <Link href='login'>
-                  <LogIn className='text-purple-600 ' />
-                  <p className='text-purple-600 font-bold'>Login</p>
-                </Link>
-              </Button>
-              {/* Register button */}
-              <Button
-                variant='ghost'
-                size='sm'
-                asChild
-                className='bg-purple-600 hover:bg-purple-500 group font-bold'
-              >
-                <Link href='register'>
-                  <User className='text-white ' />
-                  <p className='text-white font-bold '>Entrar</p>
-                </Link>
-              </Button>
+              <LoginButton />
+              <RegisterButton />
             </div>
           </div>
         )}
