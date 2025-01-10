@@ -17,7 +17,7 @@ export default function NormalChallengeResultMessage({
             Você perdeu!
           </p>
           <p className='text-lg'>
-            Infelizmente não foi dessa vez, você fez{' '}
+            Infelizmente não foi dessa vez, você completou o desafio com{' '}
             <span className='font-semibold'>
               {classification.statistics.totalScore} ponto(s)
             </span>{' '}

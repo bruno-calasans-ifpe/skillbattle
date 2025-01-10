@@ -1,9 +1,7 @@
-import { DoorOpen } from 'lucide-react';
-
 import ChallengeMoreInfoButton from '@/components/challenge-info/ChallengeMoreInfoButton';
 import Title from '@/components/custom/Title';
-import { Button } from '@/components/ui/button';
 import { Challenge } from '@/types/Challenge';
+import ExitButton from './ExitButton';
 
 type ResultTitleProps = {
   challenge: Challenge;
@@ -22,14 +20,7 @@ export default function ResultTitle({ challenge }: ResultTitleProps) {
           </p>
           <ChallengeMoreInfoButton />
         </div>
-        <Button
-          id='lobby-exit-button'
-          size='sm'
-          className='bg-red-500 hover:bg-red-600 font-bold flex justify-start'
-        >
-          <DoorOpen />
-          Sair
-        </Button>
+        <ExitButton challenge={challenge} />
       </Title>
     </header>
   );

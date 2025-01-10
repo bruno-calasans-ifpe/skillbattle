@@ -5,15 +5,15 @@ import { Session } from 'next-auth';
 import { useState } from 'react';
 
 import AppSidebar from '@/components/custom/AppSideBard';
+import RegisterButton from '@/components/header/RegisterButton';
 import { Button } from '@/components/ui/button';
 import { SidebarProvider } from '@/components/ui/sidebar';
 
+import LoginButton from '../header/LoginButton';
+import Logo from '../header/Logo';
 import CodeButton from './CodeButton';
 import CreateChallengeButton from './CreateChallengeButton';
 import UserAvatar from './UserAvatar';
-import RegisterButton from '@/components/header/RegisterButton';
-import LoginButton from '../header/LoginButton';
-import Logo from '../header/Logo';
 
 type HeaderProps = {
   session: Session | null;

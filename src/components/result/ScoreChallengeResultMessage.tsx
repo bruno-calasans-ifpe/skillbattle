@@ -18,7 +18,7 @@ export default function ScoreChallengeResultMessage({
             Você perdeu!
           </p>
           <p className='text-lg'>
-            Infelizmente não foi dessa vez, você fez{' '}
+            Infelizmente não foi dessa vez, você completou o desafio com{' '}
             <span className='font-semibold'>
               {
                 classification.statistics.challenges?.filter(
@@ -44,14 +44,14 @@ export default function ScoreChallengeResultMessage({
         Você ganhou!
       </p>
       <p className='text-lg'>
-        Parabéns, você fez o desafio com
+        Parabéns, você completou os desafios com{' '}
         {/* score */}
         <span className='font-semibold'>
           {
             classification.statistics.challenges?.filter((c) => c.type == 'won')
               .length
           }{' '}
-          ponto(s)
+          ponto(s){' '}
         </span>
         e ficou em{' '}
         <span className='font-semibold'>{classification.position}° lugar</span>!

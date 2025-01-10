@@ -21,7 +21,7 @@ export default async function ResultPage({ params }: ResultPageProps) {
   const foundChallenge = CHALLENGE_DATA.find((c) => c.id === challengeId);
   if (!foundChallenge) return;
 
-  const currentPlayer = PLAYERS_DATA[1];
+  const currentPlayer = PLAYERS_DATA[0];
 
   const getPlayerClassification = () => {
     if (foundChallenge.type === 'speed')

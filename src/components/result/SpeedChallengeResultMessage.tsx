@@ -13,13 +13,13 @@ export default function SpeedChallengeResultMessage({
   if (!won) {
     return (
       <div className='text-center'>
-        <p className='text-6xl text-red-600 uppercase font-bold'>
+        <p className='text-6xl text-emerald-600 uppercase font-bold'>
           Você perdeu!
         </p>
         <p className='text-lg'>
-          Infelizmente não foi dessa vez, você fez{' '}
+          Infelizmente não foi dessa vez, você completou o desafio em{' '}
           <span className='font-semibold'>
-            {classification.statistics.totalScore} ponto(s)
+            {classification.statistics.elapsedTime} minutos(s)
           </span>{' '}
           e ficou em{' '}
           <span className='font-semibold'>
@@ -33,9 +33,11 @@ export default function SpeedChallengeResultMessage({
 
   return (
     <div className='text-center'>
-      <p className='text-6xl text-red-600 uppercase font-bold'>Você perdeu!</p>
+      <p className='text-6xl text-emerald-600 uppercase font-bold'>
+        Você Ganhou!
+      </p>
       <p className='text-lg'>
-        Infelizmente não foi dessa vez, você fez o desafio em{' '}
+        Parabéns, você completou o desafio em{' '}
         <span className='font-semibold'>
           {classification.statistics.elapsedTime} minuto(s)
         </span>{' '}
