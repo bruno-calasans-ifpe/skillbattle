@@ -9,7 +9,7 @@ export default function CodeButton({}: CodeButtonProps) {
     <Button
       variant='ghost'
       size='sm'
-      className='bg-emerald-600 hover:bg-emerald-700 group'
+      className='bg-indigo-600 hover:bg-indigo-700 group'
     >
       <Forward className='text-white ' />
       <p className='text-white font-bold'>Código</p>

@@ -2,7 +2,7 @@
 
 import { Menu } from 'lucide-react';
 import { Session } from 'next-auth';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import AppSidebar from '@/components/custom/AppSideBard';
 import RegisterButton from '@/components/header/RegisterButton';
@@ -44,6 +44,7 @@ export default function Header({ session }: HeaderProps) {
           </Button>
           <Logo />
         </div>
+        {/* SignIn User */}
         {!session && (
           <div className='flex gap-2'>
             <CreateChallengeButton />
@@ -55,9 +56,11 @@ export default function Header({ session }: HeaderProps) {
             </div>
           </div>
         )}
+        {/* SignIn User */}
         {session && session.user && (
-          <div className='flex items-center'>
+          <div className='flex gap-1 items-center'>
             <CreateChallengeButton />
+            <CodeButton />
             <UserAvatar user={session.user} />
           </div>
         )}

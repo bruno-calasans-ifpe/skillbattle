@@ -26,44 +26,59 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { cn } from '@/lib/utils';
+import { signIn } from 'next-auth/react';
+import { getUserByEmail } from '@/services/firebase/collections/users';
+import DontHaveAccount from './DontHaveAccount';
+
 type RegisterFormProps = {
   onGoBack: () => void;
 };
 
 const formSchema = z.object({
   email: z.string().email('Email inválido'),
-  password: z
-    .string()
-    .min(6, 'Senha deve ter 6 caracteres no mínimo')
-    .max(8, 'Senha deve ter 8 caracteres no máximo'),
 });
 
-export default function LoginForm({ onGoBack }: RegisterFormProps) {
+export default function EmailLoginForm({ onGoBack }: RegisterFormProps) {
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
-      password: '',
     },
   });
 
   const [loading, setLoading] = useState(false);
 
-  const submitHandler = (values: z.infer<typeof formSchema>) => {
+  const submitHandler = async ({ email }: z.infer<typeof formSchema>) => {
     setLoading(true);
-    toast({
-      title: 'Login',
-      description: 'Logado com sucesso!',
-      className: 'bg-green-200 font-bold text-black',
-    });
+    try {
+      const foundUser = await getUserByEmail(email);
+      if (!foundUser) {
+        form.setError('email', {
+          message: 'Usuário não cadastrado',
+        });
+        return setLoading(false);
+      }
+
+      await signIn('email', { email });
+      toast({
+        title: 'Login',
+        description: 'Logado com sucesso!',
+        className: 'bg-emerald-200 font-bold text-black',
+      });
+    } catch (error) {
+      toast({
+        title: 'Login Falhou',
+        description: 'Não foi possível realziar o login',
+        className: 'bg-red-200 font-bold text-black',
+      });
+    }
     setLoading(false);
   };
 
   return (
-    <Card className={cn('flex gap-2 h-max')}>
+    <Card className='flex gap-2 h-max'>
       <div className='flex flex-col'>
         <CardHeader>
           <Button
@@ -100,27 +115,6 @@ export default function LoginForm({ onGoBack }: RegisterFormProps) {
                   </FormItem>
                 )}
               />
-
-              <FormField
-                control={form.control}
-                name='password'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className='font-bold text-purple-600'>
-                      Senha
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder='Sua senha'
-                        type='password'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
               <Button
                 disabled={loading}
                 type='submit'
@@ -138,7 +132,9 @@ export default function LoginForm({ onGoBack }: RegisterFormProps) {
             </form>
           </Form>
         </CardContent>
-        <CardFooter className='flex flex-grow items-end'></CardFooter>
+        <CardFooter className='flex flex-grow items-end'>
+          <DontHaveAccount />
+        </CardFooter>
       </div>
       <Image
         width={300}

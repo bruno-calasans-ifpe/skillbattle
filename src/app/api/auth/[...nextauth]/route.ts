@@ -1,11 +1,12 @@
 import { FirestoreAdapter } from '@auth/firebase-adapter';
 import NextAuth from 'next-auth';
-// import Nodemailer from "next-auth/providers/email";
 import EmailProvider from 'next-auth/providers/email';
 import GoogleProvider from 'next-auth/providers/google';
 
 import { GOOGLE_CLIENT_ID, GOOGLE_SECRET_ID } from '@/config/enviroment';
 import firebaseApp from '@/services/firebase/app';
+
+import { updateUserAfterSignIn } from '@/services/firebase/collections/users';
 
 const handler = NextAuth({
   providers: [
@@ -27,22 +28,19 @@ const handler = NextAuth({
     }),
   ],
   adapter: FirestoreAdapter(firebaseApp),
-  callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      return true;
-    },
-    async session({ session, token, user }) {
-      console.log(session);
-      return session;
+  events: {
+    async createUser({ user }) {
+      await updateUserAfterSignIn(user);
     },
   },
   session: {
     strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 1 * 24 * 60 * 60, // 1 days
   },
   pages: {
     signIn: '/',
     verifyRequest: '/verify-email',
+    error: '/auth-error',
   },
 });
 

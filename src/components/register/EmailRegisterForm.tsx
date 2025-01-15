@@ -29,35 +29,18 @@ import {
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
-import { registerWithEmail } from '@/services/firebase/auth';
+import HaveAccount from './HaveAccount';
+import { getUserByEmail } from '@/services/firebase/collections/users';
 
 type RegisterFormProps = {
   onGoBack: () => void;
 };
 
-const formSchema = z
-  .object({
-    email: z.string().email('Email inválido'),
-    password: z
-      .string()
-      .min(6, 'Senha deve ter 6 caracteres no mínimo')
-      .max(8, 'Senha deve ter 8 caracteres no máximo'),
-    passwordConfirmation: z
-      .string()
-      .min(6, 'Confirmação de Senha deve ter 6 caracteres no mínimo')
-      .max(8, 'Confirmação de Senha deve ter 8 caracteres no máximo'),
-  })
-  .refine(
-    (values) => {
-      return values.password === values.passwordConfirmation;
-    },
-    {
-      message: 'Senhas são diferentes',
-      path: ['passwordConfirmation'],
-    },
-  );
+const formSchema = z.object({
+  email: z.string().email('Email inválido'),
+});
 
-export default function RegisterForm({ onGoBack }: RegisterFormProps) {
+export default function EmailRegisterForm({ onGoBack }: RegisterFormProps) {
   const { toast } = useToast();
   const router = useRouter();
 
@@ -65,21 +48,21 @@ export default function RegisterForm({ onGoBack }: RegisterFormProps) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
-      password: '',
-      passwordConfirmation: '',
     },
   });
 
   const [loading, setLoading] = useState(false);
 
-  const submitHandler = async ({
-    email,
-    password,
-  }: z.infer<typeof formSchema>) => {
+  const submitHandler = async ({ email }: z.infer<typeof formSchema>) => {
     setLoading(true);
     try {
-      // register with email and password
-      // await registerWithEmail(email, password);
+      const foundUser = await getUserByEmail(email);
+      if (foundUser) {
+        form.setError('email', { message: 'Este email já está em uso' });
+        setLoading(false);
+        return;
+      }
+
       await signIn('email', { email });
 
       // show toast
@@ -124,21 +107,6 @@ export default function RegisterForm({ onGoBack }: RegisterFormProps) {
               onSubmit={form.handleSubmit(submitHandler)}
               className='space-y-8'
             >
-              {/* <FormField
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-bold text-purple-600">
-                      Usuário
-                    </FormLabel>
-                    <FormControl>
-                      <Input placeholder="usuário" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
               <FormField
                 control={form.control}
                 name='email'
@@ -149,36 +117,6 @@ export default function RegisterForm({ onGoBack }: RegisterFormProps) {
                     </FormLabel>
                     <FormControl>
                       <Input placeholder='example@email.com' {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='password'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className='font-bold text-purple-600'>
-                      Senha
-                    </FormLabel>
-                    <FormControl>
-                      <Input type='password' {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='passwordConfirmation'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className='font-bold text-purple-600'>
-                      Confirmação de Senha
-                    </FormLabel>
-                    <FormControl>
-                      <Input type='password' {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -201,7 +139,9 @@ export default function RegisterForm({ onGoBack }: RegisterFormProps) {
             </form>
           </Form>
         </CardContent>
-        <CardFooter className='flex flex-grow items-end'></CardFooter>
+        <CardFooter className='flex flex-grow items-end'>
+          <HaveAccount />
+        </CardFooter>
       </div>
       <Image
         width={300}
