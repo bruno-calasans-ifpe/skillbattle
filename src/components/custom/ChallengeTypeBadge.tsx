@@ -8,7 +8,7 @@ export default function ChallengeTypeBadge({
   children,
 }: ChallengeTypeBadgeProps) {
   return (
-    <Badge className='bg-indigo-500 hover:bg-indigo-600 cursor-pointer'>
+    <Badge className='bg-indigo-500 hover:bg-indigo-600 cursor-pointer p-1'>
       {children}
     </Badge>
   );
