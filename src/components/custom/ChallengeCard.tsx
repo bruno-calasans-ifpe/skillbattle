@@ -18,9 +18,10 @@ export default function ChallengeCard({ challenge }: ChallengeCardProps) {
         <CardTitle className='flex items-end justify-end mt-2 mr-2 gap-1'>
           <ChallengeTypeBadge>{challenge.type}</ChallengeTypeBadge>
           {challenge.categories.map((category, index) => (
-            <ChallengeCategoryBadge key={category + index}>
-              {category}
-            </ChallengeCategoryBadge>
+            <ChallengeCategoryBadge
+              key={category + index}
+              category={category}
+            />
           ))}
         </CardTitle>
         <CardContent className='flex aspect-square items-end justify-center p-2 b border-b-2 border-purple-300 mx-1 relative'>

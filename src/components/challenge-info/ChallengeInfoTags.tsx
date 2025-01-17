@@ -13,9 +13,7 @@ export default function ChallengeInfoTags({
     <div id='tags' className='flex gap-1'>
       <ChallengeTypeBadge>{challenge.type}</ChallengeTypeBadge>
       {challenge.categories.map((category) => (
-        <ChallengeCategoryBadge key={category}>
-          {category}
-        </ChallengeCategoryBadge>
+        <ChallengeCategoryBadge key={category} category={category} />
       ))}
     </div>
   );

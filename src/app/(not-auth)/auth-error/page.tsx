@@ -2,6 +2,7 @@
 
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
+import { redirect, useSearchParams } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -11,7 +12,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { redirect, useSearchParams } from 'next/navigation';
 
 type ErrorDataMessage = {
   title: string;

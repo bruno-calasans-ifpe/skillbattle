@@ -16,7 +16,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Challenge } from '@/types/Challenge';
 
-import FileUploadDropZone from '../custom/FileUploadDropZone';
+import FileUploadDropZone from '../create-challenge/CreateChallengeUploadDropZone';
 import GiveUpButton from '../custom/GiveUpButton';
 import SendButton from '../custom/SendButton';
 import { Button } from '../ui/button';
@@ -72,7 +72,7 @@ export default function PlayChallengeForm({
               <FormItem>
                 <FormLabel className='font-bold'>Envio</FormLabel>
                 <FormControl>
-                  <FileUploadDropZone />
+                  <FileUploadDropZone onUploadComplete={console.log} />
                 </FormControl>
                 <FormDescription className='flex flex-col gap-1'>
                   <span>Tamanho máximo: 4Mb</span>

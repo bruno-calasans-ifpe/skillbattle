@@ -29,8 +29,9 @@ import {
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
-import HaveAccount from './HaveAccount';
 import { getUserByEmail } from '@/services/firebase/collections/users';
+
+import HaveAccount from './HaveAccount';
 
 type RegisterFormProps = {
   onGoBack: () => void;

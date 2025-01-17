@@ -1,8 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import BackButton from '@/components/create-challenge/BackButton';
+import ConfirmButton from '@/components/create-challenge/CreateButton';
 import {
   Form,
   FormControl,
@@ -16,18 +17,28 @@ import { DEFAULT_SPEED_RULES } from '@/config/defaultRules';
 import useCreateChallengeStore from '@/store/createChallengeStore';
 
 import { Input } from '../ui/input';
+import NextButton from './NextButton';
 
 const createSpeedChallengeRulesSchema = z
   .object({
-    classifications: z
+    classifications: z.coerce
       .number()
-      .min(DEFAULT_SPEED_RULES.classifications)
-      .nonnegative(),
-    maxPlayerNum: z
+      .min(
+        DEFAULT_SPEED_RULES.classifications,
+        `Número máximo de classificações deve ser maior ou igual a ${DEFAULT_SPEED_RULES.classifications}`,
+      ),
+    maxPlayerNum: z.coerce
       .number()
-      .min(DEFAULT_SPEED_RULES.maxPlayerNum)
-      .nonnegative(),
-    maxTime: z.number().min(DEFAULT_SPEED_RULES.maxTime).nonnegative(),
+      .min(
+        DEFAULT_SPEED_RULES.maxPlayerNum,
+        `Número máximo de jogadores deve ser maior ou igual a ${DEFAULT_SPEED_RULES.maxPlayerNum}`,
+      ),
+    maxTime: z.coerce
+      .number()
+      .min(
+        DEFAULT_SPEED_RULES.maxTime,
+        `Tempo máximo deve ser maior ou igual a ${DEFAULT_SPEED_RULES.maxTime}`,
+      ),
   })
   .required();
 
@@ -36,47 +47,61 @@ type CreateSpeedChallengeRulesInputs = z.infer<
 >;
 
 export default function CreateSpeedChallengeRules() {
-  const { type, setChallengeRules, resetDefaultRules } =
-    useCreateChallengeStore();
+  const { challenge, setChallengeRules, setTab } = useCreateChallengeStore();
+  const { rules } = challenge;
+
   const form = useForm<CreateSpeedChallengeRulesInputs>({
     resolver: zodResolver(createSpeedChallengeRulesSchema),
     defaultValues: {
-      ...DEFAULT_SPEED_RULES,
+      maxPlayerNum: rules.maxPlayerNum || DEFAULT_SPEED_RULES.maxPlayerNum,
+      maxTime: rules.maxTime || DEFAULT_SPEED_RULES.maxTime,
+      classifications:
+        rules.classifications || DEFAULT_SPEED_RULES.classifications,
     },
   });
 
   const changeRulesHandler = () => {
-    const { maxPlayerNum, classifications } = form.getValues();
+    setTab('rules', false);
+    const { maxPlayerNum, classifications, maxTime } = form.getValues();
     setChallengeRules({
       maxPlayerNum: Number(maxPlayerNum),
       classifications: Number(classifications),
+      maxTime: Number(maxTime),
     });
   };
 
-  useEffect(() => {
-    if (type == 'speed') resetDefaultRules('speed');
-  }, [type]);
+  function onSubmit(values: CreateSpeedChallengeRulesInputs) {
+    console.log(values);
+    setTab('rules', true);
+  }
 
   return (
     <Form {...form}>
-      <form id='rules' className='space-y-8' onChange={changeRulesHandler}>
+      <form
+        id='create-challenge-speed-rules'
+        className='space-y-8'
+        onSubmit={form.handleSubmit(onSubmit)}
+        onChange={changeRulesHandler}
+      >
         {/* Número máximo de classificações*/}
         <FormField
           control={form.control}
           name='classifications'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='font-bold'>Classificações</FormLabel>
+              <FormLabel className='font-bold'>Classificações*</FormLabel>
               <FormControl>
                 <Input
                   {...field}
                   id='speed-challenge-classifications'
                   type='number'
+                  min={DEFAULT_SPEED_RULES.classifications}
                 />
               </FormControl>
               <FormMessage />
               <FormDescription>
-                Quantos jogadores serão classificados (mínimo é 1)
+                Quantos jogadores serão classificados (mínimo é{' '}
+                {DEFAULT_SPEED_RULES.classifications})
               </FormDescription>
             </FormItem>
           )}
@@ -89,19 +114,20 @@ export default function CreateSpeedChallengeRules() {
           render={({ field }) => (
             <FormItem>
               <FormLabel className='font-bold'>
-                Número máximo de jogadores
+                Número máximo de jogadores*
               </FormLabel>
               <FormControl>
                 <Input
                   {...field}
                   id='speed-challenge-max-player-numbers'
                   type='number'
-                  min={2}
+                  min={DEFAULT_SPEED_RULES.maxPlayerNum}
                 />
               </FormControl>
               <FormMessage />
               <FormDescription>
-                Quantos jogadores poderá ter no desafio (mínimo é 2)
+                Quantos jogadores poderá ter no desafio (mínimo é{' '}
+                {DEFAULT_SPEED_RULES.maxPlayerNum})
               </FormDescription>
             </FormItem>
           )}
@@ -114,14 +140,14 @@ export default function CreateSpeedChallengeRules() {
           render={({ field }) => (
             <FormItem>
               <FormLabel className='font-bold'>
-                Tempo máximo do desafio
+                Tempo máximo do desafio (minutos)*
               </FormLabel>
               <FormControl>
                 <Input
                   {...field}
                   id='speed-challenge-max-challenge-time'
                   type='number'
-                  min={2}
+                  min={DEFAULT_SPEED_RULES.maxTime}
                 />
               </FormControl>
               <FormMessage />
@@ -132,6 +158,10 @@ export default function CreateSpeedChallengeRules() {
             </FormItem>
           )}
         />
+        <div className='flex justify-end gap-2'>
+          <BackButton />
+          <NextButton />
+        </div>
       </form>
     </Form>
   );

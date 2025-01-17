@@ -2,6 +2,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import BackButton from '@/components/create-challenge/BackButton';
+import ConfirmButton from '@/components/create-challenge/CreateButton';
 import {
   Form,
   FormControl,
@@ -11,6 +13,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -22,14 +25,29 @@ import {
 import { DEFAULT_SCORE_RULES } from '@/config/defaultRules';
 import useCreateChallengeStore from '@/store/createChallengeStore';
 
-import { Input } from '../ui/input';
+import NextButton from './NextButton';
 
 const createScoreChallengeRulesSchema = z
   .object({
     selectionType: z.enum(['order', 'random']),
-    maxRounds: z.number().nonnegative(),
-    maxRoundTime: z.number().nonnegative().min(1),
-    maxPlayerNum: z.number().min(2).nonnegative(),
+    maxRounds: z.coerce
+      .number()
+      .min(
+        1,
+        `Número máximo de rounds deve ser maior ou igual a ${DEFAULT_SCORE_RULES.maxRounds}`,
+      ),
+    maxRoundTime: z.coerce
+      .number()
+      .min(
+        DEFAULT_SCORE_RULES.maxRoundTime,
+        `Tempo máximo deve ser maior ou igual a ${DEFAULT_SCORE_RULES.maxRoundTime}`,
+      ),
+    maxPlayerNum: z.coerce
+      .number()
+      .min(
+        DEFAULT_SCORE_RULES.maxPlayerNum,
+        `Número máximo de jogadores deve ser maior ou igual a ${DEFAULT_SCORE_RULES.maxPlayerNum}`,
+      ),
   })
   .required();
 
@@ -49,11 +67,16 @@ const challengeSelectionData = [
 ];
 
 export default function CreateScoreChallengeRules() {
-  const { setChallengeRules } = useCreateChallengeStore();
+  const { challenge, setChallengeRules, setTab } = useCreateChallengeStore();
+  const { rules } = challenge;
+
   const form = useForm<CreateScoreChallengeRulesInputs>({
     resolver: zodResolver(createScoreChallengeRulesSchema),
     defaultValues: {
-      ...DEFAULT_SCORE_RULES,
+      maxPlayerNum: rules.maxPlayerNum || DEFAULT_SCORE_RULES.maxPlayerNum,
+      maxRounds: rules.maxRounds || DEFAULT_SCORE_RULES.maxRounds,
+      maxRoundTime: rules.maxRoundTime || DEFAULT_SCORE_RULES.maxRoundTime,
+      selectionType: rules.selectionType || DEFAULT_SCORE_RULES.selectionType,
     },
   });
 
@@ -68,11 +91,17 @@ export default function CreateScoreChallengeRules() {
     });
   };
 
+  function onSubmit(values: CreateScoreChallengeRulesInputs) {
+    setTab('rules', true);
+    console.log(values);
+  }
+
   return (
     <Form {...form}>
       <form
-        id='score-rules'
+        id='create-challenge-score-rules-form'
         className='space-y-8'
+        onSubmit={form.handleSubmit(onSubmit)}
         onChange={changeRulesHandler}
       >
         {/* Seleção dos Desafios*/}
@@ -81,7 +110,7 @@ export default function CreateScoreChallengeRules() {
           name='selectionType'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='font-bold'>Seleção dos Desafios</FormLabel>
+              <FormLabel className='font-bold'>Seleção dos Desafios*</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
@@ -117,7 +146,7 @@ export default function CreateScoreChallengeRules() {
           name='maxRounds'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='font-bold'>Rounds</FormLabel>
+              <FormLabel className='font-bold'>Rounds*</FormLabel>
               <FormControl>
                 <Input
                   {...field}
@@ -128,7 +157,8 @@ export default function CreateScoreChallengeRules() {
               </FormControl>
               <FormMessage />
               <FormDescription>
-                Número máximo de rounds (mínimo é 2)
+                Número máximo de rounds (mínimo é{' '}
+                {DEFAULT_SCORE_RULES.maxRounds})
               </FormDescription>
             </FormItem>
           )}
@@ -141,7 +171,7 @@ export default function CreateScoreChallengeRules() {
           render={({ field }) => (
             <FormItem>
               <FormLabel className='font-bold'>
-                Tempo de Round (em minutos)
+                Tempo de Round (em minutos)*
               </FormLabel>
               <FormControl>
                 <Input
@@ -153,7 +183,8 @@ export default function CreateScoreChallengeRules() {
               </FormControl>
               <FormMessage />
               <FormDescription>
-                Quantos minutos cada rodada terá. (mínimo é 1)
+                Quantos minutos cada rodada terá. (mínimo é{' '}
+                {DEFAULT_SCORE_RULES.maxRoundTime})
               </FormDescription>
             </FormItem>
           )}
@@ -166,7 +197,7 @@ export default function CreateScoreChallengeRules() {
           render={({ field }) => (
             <FormItem>
               <FormLabel className='font-bold'>
-                Número máximo de jogadores
+                Número máximo de jogadores*
               </FormLabel>
               <FormControl>
                 <Input
@@ -178,11 +209,16 @@ export default function CreateScoreChallengeRules() {
               </FormControl>
               <FormMessage />
               <FormDescription>
-                Quantos jogadores poderá ter no desafio (mínimo é 2)
+                Quantos jogadores poderá ter no desafio (mínimo é{' '}
+                {DEFAULT_SCORE_RULES.maxPlayerNum})
               </FormDescription>
             </FormItem>
           )}
         />
+        <div className='flex justify-end gap-2'>
+          <BackButton />
+          <NextButton />
+        </div>
       </form>
     </Form>
   );

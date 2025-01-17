@@ -17,6 +17,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
+
 import EmailRegisterForm from './EmailRegisterForm';
 import HaveAccount from './HaveAccount';
 

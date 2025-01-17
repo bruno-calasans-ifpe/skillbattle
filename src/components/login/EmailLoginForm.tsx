@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ChevronLeft, Loader2 } from 'lucide-react';
 import Image from 'next/image';
+import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -26,8 +27,8 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { signIn } from 'next-auth/react';
 import { getUserByEmail } from '@/services/firebase/collections/users';
+
 import DontHaveAccount from './DontHaveAccount';
 
 type RegisterFormProps = {
@@ -67,7 +68,7 @@ export default function EmailLoginForm({ onGoBack }: RegisterFormProps) {
         description: 'Logado com sucesso!',
         className: 'bg-emerald-200 font-bold text-black',
       });
-    } catch (error) {
+    } catch {
       toast({
         title: 'Login Falhou',
         description: 'Não foi possível realziar o login',

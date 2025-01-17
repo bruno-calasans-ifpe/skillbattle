@@ -1,5 +1,10 @@
 import { SiGoogle } from '@icons-pack/react-simple-icons';
 import { ArrowRight, Mail } from 'lucide-react';
+import Image from 'next/image';
+import { signIn } from 'next-auth/react';
+import { useState } from 'react';
+
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -8,12 +13,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { signIn } from 'next-auth/react';
-import { useState } from 'react';
-import EmailLoginForm from './EmailLoginForm';
-import Image from 'next/image';
+
 import DontHaveAccount from './DontHaveAccount';
+import EmailLoginForm from './EmailLoginForm';
 
 export default function LoginSelectorCard() {
   const [showEmailForm, setShowEmailForm] = useState(false);

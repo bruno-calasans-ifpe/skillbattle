@@ -29,7 +29,6 @@ export default function ChallengeTypeSelector() {
 
   const changeTypeHandler = (type: ChallengeType) => {
     setChallengeType(type);
-    resetDefaultRules(type);
   };
 
   return (

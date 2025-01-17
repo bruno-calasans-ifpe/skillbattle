@@ -19,27 +19,19 @@ import {
   MenubarSeparator,
   MenubarTrigger,
 } from '@/components/ui/menubar';
-import { useToast } from '@/hooks/use-toast';
+import useCustomToast from '@/hooks/use-custom-toast';
 
 type UserAvatarProps = { user: Session['user'] };
 
 export default function UserAvatar({ user }: UserAvatarProps) {
-  const { toast } = useToast();
+  const { successToast, errorToast } = useCustomToast();
 
   const logoutHandler = async () => {
     try {
       await signOut({ callbackUrl: '/' });
-      toast({
-        title: 'Logout',
-        description: 'Deslogado com sucesso!',
-        className: 'bg-green-200 font-bold text-black',
-      });
+      successToast('Logout', 'Deslogado com sucesso!');
     } catch {
-      toast({
-        title: 'Logout',
-        description: 'Erro ao deslogar',
-        className: 'bg-red-200 font-bold text-black',
-      });
+      errorToast('Logout falhou', 'Erro ao deslogar');
     }
   };
 

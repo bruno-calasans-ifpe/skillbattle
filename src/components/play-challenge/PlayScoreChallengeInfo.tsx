@@ -27,9 +27,7 @@ export default function PlayScoreChallengeInfo({
       </InfoText>
       <InfoText title='Categoria(s)'>
         {challenge.categories.map((category, index) => (
-          <ChallengeCategoryBadge key={category + index}>
-            {category}
-          </ChallengeCategoryBadge>
+          <ChallengeCategoryBadge key={category + index} category={category} />
         ))}
       </InfoText>
     </div>

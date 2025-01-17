@@ -1,7 +1,7 @@
+import type { Session } from 'next-auth';
 import { create } from 'zustand';
 
 import type { User } from '@/types/User';
-import type { Session } from 'next-auth';
 
 type AuthStoreState = {
   session: Session | null;

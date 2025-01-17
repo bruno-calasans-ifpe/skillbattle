@@ -1,21 +1,22 @@
-import firestore from '@/services/firebase/firestore';
 import {
-  doc,
-  setDoc,
-  getDocs,
-  query,
   collection,
-  where,
+  doc,
+  getDocs,
   limit,
+  query,
+  setDoc,
+  where,
 } from 'firebase/firestore';
 import { User } from 'next-auth';
 
-const usersDocRef = collection(firestore, 'users');
+import firestore from '@/services/firebase/firestore';
+
+const usersDocumentRef = collection(firestore, 'users');
 
 export async function updateUserAfterSignIn(user: User) {
-  const userDocRef = doc(firestore, 'users', user.id);
+  const userDocumentRef = doc(firestore, 'users', user.id);
   await setDoc(
-    userDocRef,
+    userDocumentRef,
     { username: user.email?.split('@')[0].toLowerCase() },
     { merge: true },
   );
@@ -23,10 +24,10 @@ export async function updateUserAfterSignIn(user: User) {
 
 export async function getUserByEmail(email: string) {
   limit(1);
-  const userByEmailQuery = query(usersDocRef, where('email', '==', email));
+  const userByEmailQuery = query(usersDocumentRef, where('email', '==', email));
 
   const { docs, empty } = await getDocs(userByEmailQuery);
-  
+
   if (empty) return null;
 
   const result = docs.map((d) => {

@@ -1,8 +1,10 @@
+'use client';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { Button } from '@/components/ui/button';
+import CreateChallengeUploadDropZone from '@/components/create-challenge/CreateChallengeUploadDropZone';
 import {
   Form,
   FormControl,
@@ -14,48 +16,58 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import useCustomToast from '@/hooks/use-custom-toast';
 import useCreateChallengeStore from '@/store/createChallengeStore';
 
-import FileUploadDropZone from '../custom/FileUploadDropZone';
+import NextButton from './NextButton';
 
 const createChallengeSchema = z
   .object({
-    url: z
-      .string({ required_error: 'Url do desafio é obrigatório' })
-      .url('Url inválida'),
-    title: z.string({ required_error: 'Nome do desafio é obrigatório' }),
-    challenge: z.string(),
-    category: z.string(),
-    desc: z.string(),
+    image: z.string(),
+    title: z
+      .string({ required_error: 'Título é obrigatório' })
+      .min(1, 'Título não pode estar vazio'),
+    desc: z
+      .string({ required_error: 'Descrição é obrigatório' })
+      .min(1, 'Descrição não pode estar vazia'),
   })
   .required();
 
 type CreateChallengeInputs = z.infer<typeof createChallengeSchema>;
 
-export default function CreateChallengeForm() {
-  const { updateChallenge } = useCreateChallengeStore();
+export default function BasicConfigForm() {
+  const { successToast, errorToast } = useCustomToast();
+  const { challenge, updateChallenge, setTab, goNextTab } =
+    useCreateChallengeStore();
 
   const form = useForm<CreateChallengeInputs>({
     resolver: zodResolver(createChallengeSchema),
     defaultValues: {
-      url: '',
-      title: '',
+      title: challenge.title,
+      image: challenge.image,
+      desc: challenge.desc,
     },
   });
 
-  function onSubmit(values: CreateChallengeInputs) {
-    console.log(values);
-  }
+  const onSubmit = async (inputs: CreateChallengeInputs) => {
+    setTab('basic', true);
+    goNextTab();
+  };
 
   const changeFormHandler = () => {
-    const values = form.getValues();
-    updateChallenge(values);
+    const input = form.getValues();
+    updateChallenge(input);
+  };
+
+  const uploadCompleteHandler = (fileUrl: string) => {
+    form.setValue('image', fileUrl);
+    form.clearErrors('image');
   };
 
   return (
     <Form {...form}>
       <form
-        id='create-challenge'
+        id='create-challenge-form'
         className='space-y-8'
         onSubmit={form.handleSubmit(onSubmit)}
         onChange={changeFormHandler}
@@ -63,55 +75,41 @@ export default function CreateChallengeForm() {
         {/* Imagem */}
         <FormField
           control={form.control}
-          name='url'
+          name='image'
           render={() => (
             <FormItem>
               <FormLabel className='font-bold'>Imagem</FormLabel>
               <FormControl>
-                <FileUploadDropZone />
+                <CreateChallengeUploadDropZone
+                  onUploadComplete={uploadCompleteHandler}
+                />
               </FormControl>
               <FormDescription>
-                Uma imagem para representar o desafio.
+                Uma imagem para representar o desafio que você quer criar. Se
+                nenhuma imagem for enviada, usará uma imagem pré-definida.
               </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        {/* Nome */}
+        {/* Title */}
         <FormField
           control={form.control}
           name='title'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='font-bold'>Título</FormLabel>
+              <FormLabel className='font-bold'>Título*</FormLabel>
               <FormControl>
                 <Input
                   {...field}
-                  id='challenge-title'
+                  id='title-input'
                   type='text'
                   placeholder='Título do desafio'
                 />
               </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/*  Desafio*/}
-        <FormField
-          control={form.control}
-          name='challenge'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className='font-bold'>Desafio</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  id='challenge'
-                  type='text'
-                  placeholder='O desafio para os jogadores'
-                />
-              </FormControl>
+              <FormDescription>
+                Um título para resumir o desafio com poucas palavras
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -123,7 +121,7 @@ export default function CreateChallengeForm() {
           name='desc'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='font-bold'>Descrição</FormLabel>
+              <FormLabel className='font-bold'>Descrição*</FormLabel>
               <FormControl>
                 <Textarea
                   {...field}
@@ -132,26 +130,31 @@ export default function CreateChallengeForm() {
                   placeholder='Descrição do desafio'
                 />
               </FormControl>
+              <FormDescription>
+                Descrição breve e clara para que os outros jogadores possam
+                entender como funcionará o desafio.
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-
-        <div className='flex flex-1 gap-3'>
-          <Button
-            id='reset-challenge'
+        {/* Create Buttons */}
+        <div id='create-challenge-buttons' className='flex justify-end'>
+          {/* <Button
+            id='reset-challenge-button'
             type='reset'
             className='flex-1 bg-indigo-500 font-bold hover:bg-indigo-600'
           >
             Limpar
           </Button>
           <Button
-            id='submit-challenge'
+            id='submit-challenge-button'
             type='submit'
             className='flex-1 bg-emerald-500 font-bold hover:bg-emerald-600'
           >
             Criar desafio
-          </Button>
+          </Button> */}
+          <NextButton />
         </div>
       </form>
     </Form>
