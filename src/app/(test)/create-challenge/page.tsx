@@ -11,6 +11,7 @@ import TabStatusIndicator from '@/components/create-challenge/TabStatusIndicator
 import ContentContainer from '@/components/custom/ContentContainer';
 import Title from '@/components/custom/Title';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import useAuthStore from '@/store/authStore';
 import useCreateChallengeStore, { TabName } from '@/store/createChallengeStore';
 
 type TabData = {
@@ -60,7 +61,9 @@ export default function CreateChallengePage() {
               asChild
             >
               <div className='flex gap- cursor-pointer'>
-                <TabStatusIndicator position={index + 1} tab={tab.value} />
+                {tab.value !== 'resume' && (
+                  <TabStatusIndicator tab={tab.value} />
+                )}
                 {tab.label}
               </div>
             </TabsTrigger>

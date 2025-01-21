@@ -74,6 +74,11 @@ export default function ChallengeCreatorForm({}: ChallengeCreatorFormProps) {
     return formError;
   };
 
+  const changeChallengeHandler = () => {
+    setTab('challenge', false);
+    checkErrors();
+  };
+
   useEffect(() => {
     // if (!firstTimeRender) checkErrors();
     if (firstTimeRender) firstTimeRender = false;
@@ -81,7 +86,11 @@ export default function ChallengeCreatorForm({}: ChallengeCreatorFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        onChange={changeChallengeHandler}
+        className='space-y-8'
+      >
         {/* Challenge */}
         <FormField
           control={form.control}

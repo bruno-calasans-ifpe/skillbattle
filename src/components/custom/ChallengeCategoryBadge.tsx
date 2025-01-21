@@ -14,7 +14,7 @@ export default function ChallengeCategoryBadge({
   showClose,
 }: ChallengeCategoryBadgeProps) {
   return (
-    <Badge className='bg-purple-500 cursor-pointer hover:bg-purple-600 p-1 flex gap-2 justify-between'>
+    <Badge className='bg-purple-500 cursor-pointer hover:bg-purple-600 p-1 flex gap-2 justify-between w-fit'>
       {category}
       {showClose && (
         <X

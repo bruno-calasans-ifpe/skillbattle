@@ -32,6 +32,18 @@ const handler = NextAuth({
       await updateUserAfterSignIn(user);
     },
   },
+  callbacks: {
+    async jwt({ token, session, user }) {
+      session = {
+        user,
+      };
+      return token;
+    },
+    async session(params) {
+      console.log('session callback = ', params);
+      return params.session;
+    },
+  },
   session: {
     strategy: 'jwt',
     maxAge: 1 * 24 * 60 * 60, // 1 days

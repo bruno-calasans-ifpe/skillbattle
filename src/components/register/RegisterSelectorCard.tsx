@@ -20,18 +20,32 @@ import { cn } from '@/lib/utils';
 
 import EmailRegisterForm from './EmailRegisterForm';
 import HaveAccount from './HaveAccount';
+import useCustomToast from '@/hooks/use-custom-toast';
 
-type RegisterSelectorCardProps = {};
-
-export default function RegisterSelectorCard({}: RegisterSelectorCardProps) {
+export default function RegisterSelectorCard() {
   const [showEmailForm, setShowEmailForm] = useState(false);
+  const [loggingWithGoogle, setLoggingWithGoogle] = useState(false);
+  const { successToast, errorToast } = useCustomToast();
 
   const emailLoginFormToggle = () => {
     setShowEmailForm((current) => !current);
   };
 
   const googleRegisterHandler = async () => {
-    await signIn('google');
+    try {
+      setLoggingWithGoogle(true);
+      await signIn('google');
+      successToast(
+        'Login com Google com sucesso',
+        'Login com conta do Google realizado com sucesso',
+      );
+    } catch (error) {
+      errorToast(
+        'Login com Google falhou',
+        'Não foi possível realizar o login com sua conta do Google',
+      );
+    }
+    setLoggingWithGoogle(false);
   };
 
   return (
@@ -51,6 +65,7 @@ export default function RegisterSelectorCard({}: RegisterSelectorCardProps) {
             </CardHeader>
             <CardContent>
               <Button
+                disabled={loggingWithGoogle}
                 onClick={googleRegisterHandler}
                 className='flex justify-between w-full bg-white text-black font-bold hover:bg-[#D62D20] hover:text-white group transition-all'
               >

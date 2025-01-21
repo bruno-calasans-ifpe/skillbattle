@@ -1,25 +1,32 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import useCustomToast from '@/hooks/use-custom-toast';
 import { createChallenge } from '@/services/firebase/collections/challenges';
+import useAuthStore from '@/store/authStore';
 import useCreateChallengeStore from '@/store/createChallengeStore';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
-type CreateButtonProps = {
-  tab?: string;
-  disabled?: boolean;
-};
-
-export default function CreateButton({ disabled }: CreateButtonProps) {
+export default function CreateButton() {
   const { challenge } = useCreateChallengeStore();
   const { successToast, errorToast } = useCustomToast();
+  const [loading, setLoading] = useState(false);
+  const { user } = useAuthStore();
+  const router = useRouter();
 
-  const createChallengeHandler = () => {
+  const createChallengeHandler = async () => {
+    if (!user) return;
+    setLoading(true);
     try {
-      createChallenge(challenge);
+      challenge.createdBy = user.id;
+      await createChallenge(challenge);
       successToast('Desafio criado sucesso', 'Desafio foi criado');
+      router.push('/');
     } catch (error) {
       errorToast('Error ao criar desafio', 'Tente novamente mais tarde');
-      console.log(error);
     }
+    setLoading(false);
   };
 
   return (
@@ -27,10 +34,10 @@ export default function CreateButton({ disabled }: CreateButtonProps) {
       id='create-button'
       type='submit'
       className='bg-emerald-500 hover:bg-emerald-600 font-bold'
-      disabled={disabled}
+      disabled={loading}
       onClick={createChallengeHandler}
     >
-      Criar
+      {loading ? 'Criando...' : 'Criar desafio'}
     </Button>
   );
 }

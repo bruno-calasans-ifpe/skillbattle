@@ -11,14 +11,10 @@ import useCreateChallengeStore, { TabName } from '@/store/createChallengeStore';
 import PulseLoader from '../custom/PulseLoader';
 
 type TabStatusIndicatorProps = {
-  position: number;
   tab: TabName;
 };
 
-export default function TabStatusIndicator({
-  position,
-  tab,
-}: TabStatusIndicatorProps) {
+export default function TabStatusIndicator({ tab }: TabStatusIndicatorProps) {
   const { tabConfig } = useCreateChallengeStore();
 
   // pending
@@ -27,7 +23,7 @@ export default function TabStatusIndicator({
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger>
-            <PulseLoader variant='error' size={3} />
+            <PulseLoader variant='error' size={2} />
           </TooltipTrigger>
           <TooltipContent>
             <p>Pendente</p>
@@ -41,7 +37,7 @@ export default function TabStatusIndicator({
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger>
-          <PulseLoader variant='success' size={3} />
+          <PulseLoader variant='success' size={2} />
         </TooltipTrigger>
         <TooltipContent>
           <p>Concluído</p>

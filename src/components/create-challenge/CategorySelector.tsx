@@ -41,12 +41,13 @@ export default function CategorySelector({}: CategorySelectorProps) {
   return (
     <div className='flex flex-col gap-1'>
       {challenge.categories.length > 0 && (
-        <div className='grid grid-cols-5 flex-1 p-1 gap-1'>
+        <div className='grid lg:grid-cols-6 md:grid-cols-5 flex-1 p-1 gap-1'>
           {challenge.categories.map((category) => (
             <ChallengeCategoryBadge
               key={category}
               category={category}
               onRemove={removeCategoryHandler}
+              showClose
             />
           ))}
         </div>

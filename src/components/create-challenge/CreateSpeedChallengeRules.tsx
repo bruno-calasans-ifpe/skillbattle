@@ -47,7 +47,8 @@ type CreateSpeedChallengeRulesInputs = z.infer<
 >;
 
 export default function CreateSpeedChallengeRules() {
-  const { challenge, setChallengeRules, setTab } = useCreateChallengeStore();
+  const { challenge, setChallengeRules, setTab, goNextTab } =
+    useCreateChallengeStore();
   const { rules } = challenge;
 
   const form = useForm<CreateSpeedChallengeRulesInputs>({
@@ -73,6 +74,7 @@ export default function CreateSpeedChallengeRules() {
   function onSubmit(values: CreateSpeedChallengeRulesInputs) {
     console.log(values);
     setTab('rules', true);
+    goNextTab();
   }
 
   return (

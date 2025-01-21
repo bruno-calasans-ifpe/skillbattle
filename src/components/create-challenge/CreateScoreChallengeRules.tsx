@@ -67,7 +67,8 @@ const challengeSelectionData = [
 ];
 
 export default function CreateScoreChallengeRules() {
-  const { challenge, setChallengeRules, setTab } = useCreateChallengeStore();
+  const { challenge, setChallengeRules, setTab, goNextTab } =
+    useCreateChallengeStore();
   const { rules } = challenge;
 
   const form = useForm<CreateScoreChallengeRulesInputs>({
@@ -93,6 +94,7 @@ export default function CreateScoreChallengeRules() {
 
   function onSubmit(values: CreateScoreChallengeRulesInputs) {
     setTab('rules', true);
+    goNextTab();
     console.log(values);
   }
 
@@ -178,7 +180,7 @@ export default function CreateScoreChallengeRules() {
                   {...field}
                   id='score-challenge-max-round-time'
                   type='number'
-                  min={2}
+                  min={DEFAULT_SCORE_RULES.maxRoundTime}
                 />
               </FormControl>
               <FormMessage />

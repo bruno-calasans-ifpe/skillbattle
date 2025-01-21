@@ -6,14 +6,16 @@ import {
   query,
   setDoc,
   where,
+  getDoc,
 } from 'firebase/firestore';
-import { User } from 'next-auth';
+import { User as AuthUser } from 'next-auth';
 
 import firestore from '@/services/firebase/firestore';
+import { User } from '@/types/User';
 
 const usersDocumentRef = collection(firestore, 'users');
 
-export async function updateUserAfterSignIn(user: User) {
+export async function updateUserAfterSignIn(user: AuthUser) {
   const userDocumentRef = doc(firestore, 'users', user.id);
   await setDoc(
     userDocumentRef,
@@ -31,7 +33,11 @@ export async function getUserByEmail(email: string) {
   if (empty) return null;
 
   const result = docs.map((d) => {
-    if (d.exists()) return d.data();
+    if (d.exists()) {
+      const { email, name, image, username } = d.data();
+      return { id: d.id, email, name, image, username } as User;
+    }
   })[0];
+
   return result;
 }

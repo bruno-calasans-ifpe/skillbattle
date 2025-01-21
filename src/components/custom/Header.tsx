@@ -15,17 +15,25 @@ import Logo from '../header/Logo';
 import CodeButton from './CodeButton';
 import CreateChallengeButton from './CreateChallengeButton';
 import UserAvatar from './UserAvatar';
+import { User } from '@/types/User';
+import useAuthStore from '@/store/authStore';
 
 type HeaderProps = {
   session: Session | null;
+  user: User | null;
 };
 
-export default function Header({ session }: HeaderProps) {
+export default function Header({ session, user }: HeaderProps) {
   const [open, setOpenSideBar] = useState(false);
+  const { setUser } = useAuthStore();
 
   const toggleSideBar = () => {
     setOpenSideBar((current) => !current);
   };
+
+  useEffect(() => {
+    setUser(user);
+  }, [session, user]);
 
   return (
     <>
