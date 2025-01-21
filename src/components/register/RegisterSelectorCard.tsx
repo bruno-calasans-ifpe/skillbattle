@@ -16,11 +16,11 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import useCustomToast from '@/hooks/use-custom-toast';
 import { cn } from '@/lib/utils';
 
 import EmailRegisterForm from './EmailRegisterForm';
 import HaveAccount from './HaveAccount';
-import useCustomToast from '@/hooks/use-custom-toast';
 
 export default function RegisterSelectorCard() {
   const [showEmailForm, setShowEmailForm] = useState(false);
@@ -39,7 +39,7 @@ export default function RegisterSelectorCard() {
         'Login com Google com sucesso',
         'Login com conta do Google realizado com sucesso',
       );
-    } catch (error) {
+    } catch {
       errorToast(
         'Login com Google falhou',
         'Não foi possível realizar o login com sua conta do Google',

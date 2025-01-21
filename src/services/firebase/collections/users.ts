@@ -1,12 +1,12 @@
 import {
   collection,
   doc,
+  getDoc,
   getDocs,
   limit,
   query,
   setDoc,
   where,
-  getDoc,
 } from 'firebase/firestore';
 import { User as AuthUser } from 'next-auth';
 

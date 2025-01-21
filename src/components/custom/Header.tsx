@@ -9,14 +9,14 @@ import AppSidebar from '@/components/custom/AppSideBard';
 import RegisterButton from '@/components/header/RegisterButton';
 import { Button } from '@/components/ui/button';
 import { SidebarProvider } from '@/components/ui/sidebar';
+import useAuthStore from '@/store/authStore';
+import { User } from '@/types/User';
 
 import LoginButton from '../header/LoginButton';
 import Logo from '../header/Logo';
 import CodeButton from './CodeButton';
 import CreateChallengeButton from './CreateChallengeButton';
 import UserAvatar from './UserAvatar';
-import { User } from '@/types/User';
-import useAuthStore from '@/store/authStore';
 
 type HeaderProps = {
   session: Session | null;

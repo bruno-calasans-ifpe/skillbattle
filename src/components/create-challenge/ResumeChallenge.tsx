@@ -1,8 +1,9 @@
 import useCreateChallengeStore from '@/store/createChallengeStore';
-import CreateButton from './CreateButton';
-import InfoText from '../custom/InfoText';
+
 import ChallengeCategoryBadge from '../custom/ChallengeCategoryBadge';
+import InfoText from '../custom/InfoText';
 import BackButton from './BackButton';
+import CreateButton from './CreateButton';
 
 type ResumeChallengeProps = {};
 

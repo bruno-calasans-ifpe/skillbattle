@@ -1,12 +1,13 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
 import { Button } from '@/components/ui/button';
 import useCustomToast from '@/hooks/use-custom-toast';
 import { createChallenge } from '@/services/firebase/collections/challenges';
 import useAuthStore from '@/store/authStore';
 import useCreateChallengeStore from '@/store/createChallengeStore';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 
 export default function CreateButton() {
   const { challenge } = useCreateChallengeStore();
@@ -23,7 +24,7 @@ export default function CreateButton() {
       await createChallenge(challenge);
       successToast('Desafio criado sucesso', 'Desafio foi criado');
       router.push('/');
-    } catch (error) {
+    } catch {
       errorToast('Error ao criar desafio', 'Tente novamente mais tarde');
     }
     setLoading(false);
