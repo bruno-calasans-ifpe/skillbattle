@@ -11,7 +11,6 @@ import TabStatusIndicator from '@/components/create-challenge/TabStatusIndicator
 import ContentContainer from '@/components/custom/ContentContainer';
 import Title from '@/components/custom/Title';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import useAuthStore from '@/store/authStore';
 import useCreateChallengeStore, { TabName } from '@/store/createChallengeStore';
 
 type TabData = {
@@ -52,7 +51,7 @@ export default function CreateChallengePage() {
       <Tabs value={tabConfig.current} defaultValue={tabConfig.current}>
         {/* Tabs buttons */}
         <TabsList className='flex'>
-          {TAB_DATA.map((tab, index) => (
+          {TAB_DATA.map((tab) => (
             <TabsTrigger
               key={tab.value}
               className='flex-1 gap-1 justify-start'

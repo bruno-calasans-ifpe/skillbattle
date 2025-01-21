@@ -15,6 +15,6 @@ import firestore from '../firestore';
 
 const challengesCollection = collection(firestore, 'challenges');
 
-export async function createChallenge(challenge: Challenge) {
+export async function createChallenge(challenge: Omit<Challenge, 'id'>) {
   await addDoc(challengesCollection, challenge);
 }

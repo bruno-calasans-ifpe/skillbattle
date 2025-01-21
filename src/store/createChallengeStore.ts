@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-
 import {
   DEFAULT_NORMAL_RULES,
   DEFAULT_SCORE_RULES,
@@ -20,7 +19,7 @@ export type TabConfig = {
 };
 
 export type CreateChallengeState = {
-  challenge: Challenge;
+  challenge: Omit<Challenge, 'id'>;
   tabConfig: TabConfig;
 };
 
@@ -47,7 +46,6 @@ type CreateChallengeStore = CreateChallengeState & CreateChallengeActions;
 
 export const createChallengeStoreInitialState: CreateChallengeState = {
   challenge: {
-    id: '',
     title: '',
     categories: [],
     challenges: [],
@@ -156,10 +154,10 @@ const useCreateChallengeStore = create<CreateChallengeStore>()((set, get) => ({
     updateTabConfig({ finished: { ...tabConfig.finished, [tab]: value } });
   },
   gotToTab(tab) {
-    // const { tabConfig } = get();
-    // const canIGoToTab = tab === tabConfig.current || tabConfig.finished[tab];
-    // if (!canIGoToTab) return;
-    // get().updateTabConfig({ current: tab });
+    const { tabConfig } = get();
+    const canIGoToTab = tab === tabConfig.current || tabConfig.finished[tab];
+    if (!canIGoToTab) return;
+    get().updateTabConfig({ current: tab });
   },
   goBackTab() {
     const { tabConfig, updateTabConfig } = get();
